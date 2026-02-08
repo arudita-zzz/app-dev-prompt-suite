@@ -7,7 +7,7 @@
 
 **Based on:** `{path-to-feasibility-report}`
 **Created:** {date}
-**Next step:** `/app-dev-suit:implement-tdd -s <this-file>`
+**Next step:** `/app-dev-suite:implement-tdd -s <this-file>`
 
 ## Requirements
 
@@ -61,5 +61,5 @@ graph LR
 
 1. Review this solution design
 2. Run the following command to proceed:
-   `/app-dev-suit:implement-tdd -s {actual-output-path}`
+   `/app-dev-suite:implement-tdd -s {actual-output-path}`
 ````

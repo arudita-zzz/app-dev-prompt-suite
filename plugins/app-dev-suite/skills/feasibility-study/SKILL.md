@@ -61,7 +61,7 @@ Save hierarchical docs:
 - TaskCreate: `Solution Design: <task-name>` as next step
 - Display next phase command:
   ```
-  Next: /app-dev-suit:solution-design -s {path-to-feasibility-report}
+  Next: /app-dev-suite:solution-design -s {path-to-feasibility-report}
   ```
 - AskUserQuestion: proceed to next phase? (Yes: copy and run the command above / No: run later / Type Anything)
 

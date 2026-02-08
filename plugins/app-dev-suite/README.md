@@ -1,4 +1,4 @@
-# app-dev-suit
+# app-dev-suite
 
 A Claude Code plugin providing a three-phase spec-driven development workflow: feasibility study, solution design, and TDD implementation.
 
@@ -11,31 +11,50 @@ A Claude Code plugin providing a three-phase spec-driven development workflow: f
 /plugin marketplace add taakashifukada/app-dev-prompt-suite
 
 # Install plugin
-/plugin install app-dev-suit@app-dev-prompt-suite
+/plugin install app-dev-suite@app-dev-prompt-suite
 ```
 
 ### From Local Directory
 
 ```bash
-claude --plugin-dir ./app-dev-suit-plugin
+claude --plugin-dir ./app-dev-suite-plugin
 ```
 
-After installation, skills are accessible with the `app-dev-suit:` namespace prefix:
+After installation, skills are accessible with the `app-dev-suite:` namespace prefix:
 ```
-/app-dev-suit:feasibility-study
-/app-dev-suit:solution-design
-/app-dev-suit:implement-tdd
-/app-dev-suit:setup-wizard
-/app-dev-suit:small-feature
+/app-dev-suite:feasibility-study
+/app-dev-suite:solution-design
+/app-dev-suite:implement-tdd
+/app-dev-suite:setup-wizard
+/app-dev-suite:small-feature
 ```
 
 ## Overview
 
-app-dev-suit provides a three-phase development workflow:
+app-dev-suite is a structured development workflow plugin for teams that need **process transparency**, **decision traceability**, and **quality gates** — capabilities that Claude Code's built-in Plan Mode does not provide.
 
-1. **Feasibility Study** — Deep analysis of requirements, codebase research, and solution exploration
-2. **Solution Design** — Detailed implementation planning with test cases and task breakdown
-3. **TDD Implementation** — Test-driven development following the solution design
+### Three-Phase Workflow
+
+1. **Feasibility Study** — Codebase analysis, web research, solution candidates, and optional PoC
+2. **Solution Design** — Subtask breakdown, dependency mapping, test case planning
+3. **TDD Implementation** — Test-driven development with per-subtask quality checks
+
+Each phase produces structured documents (summary + hierarchical details) that serve as audit trails and team-shareable artifacts.
+
+### Why app-dev-suite over Plan Mode?
+
+| | Plan Mode | app-dev-suite |
+|---|---|---|
+| **Artifacts** | Single `plan.md` | Hierarchical docs per phase (report, details, alternatives, PoC results) |
+| **Decision records** | Conversation log only | `alternatives.md` with comparison matrix and selection rationale |
+| **Quality control** | None | Quality gates with Pass/Warn/Block at phase boundaries |
+| **Checkpoints** | 1 (plan approval) | 2+ (phase transitions + in-phase approvals) |
+| **Output format** | Free-form, varies each run | Fixed templates for consistent, reviewable output |
+| **Context management** | Subagent separation only | 100-line summaries + detail files for efficient phase-to-phase handoff |
+
+**Best fit**: Projects requiring explainability — why this design was chosen, what alternatives were considered, and what quality criteria were met. Ideal when development decisions need to be reviewed by team members or stakeholders.
+
+For quick individual tasks, Plan Mode or `/app-dev-suite:small-feature` remains the simpler choice.
 
 ## Quick Start
 
@@ -43,7 +62,7 @@ app-dev-suit provides a three-phase development workflow:
 
 Run the interactive setup wizard:
 ```
-/app-dev-suit:setup-wizard
+/app-dev-suite:setup-wizard
 ```
 
 Generates a customized `.claude/config.yaml` in your project.
@@ -51,16 +70,16 @@ Generates a customized `.claude/config.yaml` in your project.
 ### Basic Usage (No Configuration Required)
 
 ```
-/app-dev-suit:feasibility-study    # Phase 1
-/app-dev-suit:solution-design      # Phase 2
-/app-dev-suit:implement-tdd        # Phase 3
+/app-dev-suite:feasibility-study    # Phase 1
+/app-dev-suite:solution-design      # Phase 2
+/app-dev-suite:implement-tdd        # Phase 3
 ```
 
 ### Quick Implementation
 
 For smaller tasks that don't need the full three-phase workflow:
 ```
-/app-dev-suit:small-feature
+/app-dev-suite:small-feature
 ```
 
 ## Skills
@@ -85,8 +104,8 @@ For smaller tasks that don't need the full three-phase workflow:
 
 ## Configuration
 
-app-dev-suit works out-of-the-box with sensible defaults. For customization:
-- Run `/app-dev-suit:setup-wizard`
+app-dev-suite works out-of-the-box with sensible defaults. For customization:
+- Run `/app-dev-suite:setup-wizard`
 - Or edit `.claude/config.yaml` directly
 
 See `config.default.yaml` for the complete schema.
@@ -99,7 +118,7 @@ See `config.default.yaml` for the complete schema.
 
 ## Project-Specific Plugins
 
-app-dev-suit is designed to be generic. For project-specific skills (JIRA integration, architecture documentation, etc.), create a separate plugin:
+app-dev-suite is designed to be generic. For project-specific skills (JIRA integration, architecture documentation, etc.), create a separate plugin:
 
 ```
 my-project-skills/
@@ -121,22 +140,25 @@ app-dev-prompt-suite/                    # Marketplace repository
 ├── .claude-plugin/
 │   └── marketplace.json                 # Marketplace catalog
 └── plugins/
-    └── app-dev-suit/                    # Plugin
+    └── app-dev-suite/                    # Plugin
         ├── .claude-plugin/
         │   └── plugin.json
         ├── skills/
         │   ├── feasibility-study/
         │   │   ├── SKILL.md
         │   │   ├── report-format.md
-        │   │   └── details-format.md
+        │   │   ├── details-format.md
+        │   │   └── steps/
         │   ├── solution-design/
         │   │   ├── SKILL.md
         │   │   ├── design-format.md
         │   │   ├── details-format.md
-        │   │   └── subtask-design-template.md
+        │   │   ├── subtask-design-template.md
+        │   │   └── steps/
         │   ├── implement-tdd/
         │   │   ├── SKILL.md
-        │   │   └── scaling-strategies.md
+        │   │   ├── scaling-strategies.md
+        │   │   └── steps/
         │   ├── quality-gate/
         │   │   ├── SKILL.md
         │   │   └── quality-checklist-template.md
@@ -161,14 +183,14 @@ app-dev-prompt-suite/                    # Marketplace repository
 
 ```
 # Phase 1: Feasibility Study
-/app-dev-suit:feasibility-study
+/app-dev-suite:feasibility-study
 # → Produces: {docs_dir}/{task_name}/feasibility_report.md
 
 # Phase 2: Solution Design
-/app-dev-suit:solution-design
+/app-dev-suite:solution-design
 # → Produces: {docs_dir}/{task_name}/solution_design.md
 
 # Phase 3: Implementation
-/app-dev-suit:implement-tdd
+/app-dev-suite:implement-tdd
 # → Produces: {docs_dir}/{task_name}/implementation_report.md
 ```

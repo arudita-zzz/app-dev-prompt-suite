@@ -68,7 +68,7 @@ Read [approval loop instructions](steps/approval-loop.md) and execute.
 - TaskCreate: `TDD Implementation: <task-name>`
 - Display next phase command:
   ```
-  Next: /app-dev-suit:implement-tdd -s {path-to-solution-design}
+  Next: /app-dev-suite:implement-tdd -s {path-to-solution-design}
   ```
 - AskUserQuestion: proceed to next phase? (Yes: copy and run the command above / No: run later / Type Anything)
 

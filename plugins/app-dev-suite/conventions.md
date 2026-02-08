@@ -1,4 +1,4 @@
-# app-dev-suit Conventions
+# app-dev-suite Conventions
 
 ## Configuration Loading
 

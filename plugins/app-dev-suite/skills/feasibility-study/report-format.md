@@ -6,7 +6,7 @@
 # Feasibility Report: {task-name}
 
 **Created:** {date}
-**Next step:** `/app-dev-suit:solution-design -s <this-file>`
+**Next step:** `/app-dev-suite:solution-design -s <this-file>`
 
 ## Requirements
 
@@ -41,5 +41,5 @@
 
 1. Review this feasibility report
 2. Run the following command to proceed:
-   `/app-dev-suit:solution-design -s {actual-output-path}`
+   `/app-dev-suite:solution-design -s {actual-output-path}`
 ```

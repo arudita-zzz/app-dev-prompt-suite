@@ -1,6 +1,6 @@
 ---
 name: quality-gate
-description: Manage quality checklists, metrics tracking, and phase gate decisions for the app-dev-suit workflow.
+description: Manage quality checklists, metrics tracking, and phase gate decisions for the app-dev-suite workflow.
 user-invocable: false
 ---
 

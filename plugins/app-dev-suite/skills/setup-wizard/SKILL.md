@@ -1,6 +1,6 @@
 ---
 name: setup-wizard
-description: Interactive configuration wizard to set up app-dev-suit
+description: Interactive configuration wizard to set up app-dev-suite
 argument-hint: none
 allowed-tools: Read, Write, Glob, Bash(mkdir)
 ---
