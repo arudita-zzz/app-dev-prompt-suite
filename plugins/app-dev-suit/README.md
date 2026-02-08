@@ -117,41 +117,44 @@ Install both plugins to combine generic workflow with project-specific capabilit
 ## File Structure
 
 ```
-app-dev-suit/
+app-dev-prompt-suite/                    # Marketplace repository
 ├── .claude-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
-├── skills/
-│   ├── feasibility-study/
-│   │   ├── SKILL.md
-│   │   ├── report-format.md
-│   │   └── details-format.md
-│   ├── solution-design/
-│   │   ├── SKILL.md
-│   │   ├── design-format.md
-│   │   ├── details-format.md
-│   │   └── subtask-design-template.md
-│   ├── implement-tdd/
-│   │   ├── SKILL.md
-│   │   └── scaling-strategies.md
-│   ├── quality-gate/
-│   │   ├── SKILL.md
-│   │   └── quality-checklist-template.md
-│   ├── setup-wizard/
-│   │   ├── SKILL.md
-│   │   └── config-template.md
-│   └── small-feature/
-│       └── SKILL.md
-├── agents/
-│   ├── document-summarizer.md
-│   ├── poc-feasibility-expert.md
-│   ├── tdd-implementer.md
-│   └── web-research-expert.md
-├── conventions.md
-├── config.default.yaml
-├── doc/
-│   └── workflow-diagrams.md
-└── README.md
+│   └── marketplace.json                 # Marketplace catalog
+└── plugins/
+    └── app-dev-suit/                    # Plugin
+        ├── .claude-plugin/
+        │   └── plugin.json
+        ├── skills/
+        │   ├── feasibility-study/
+        │   │   ├── SKILL.md
+        │   │   ├── report-format.md
+        │   │   └── details-format.md
+        │   ├── solution-design/
+        │   │   ├── SKILL.md
+        │   │   ├── design-format.md
+        │   │   ├── details-format.md
+        │   │   └── subtask-design-template.md
+        │   ├── implement-tdd/
+        │   │   ├── SKILL.md
+        │   │   └── scaling-strategies.md
+        │   ├── quality-gate/
+        │   │   ├── SKILL.md
+        │   │   └── quality-checklist-template.md
+        │   ├── setup-wizard/
+        │   │   ├── SKILL.md
+        │   │   └── config-template.md
+        │   └── small-feature/
+        │       └── SKILL.md
+        ├── agents/
+        │   ├── document-summarizer.md
+        │   ├── poc-feasibility-expert.md
+        │   ├── tdd-implementer.md
+        │   └── web-research-expert.md
+        ├── conventions.md
+        ├── config.default.yaml
+        ├── doc/
+        │   └── workflow-diagrams.md
+        └── README.md
 ```
 
 ## Example Workflow
