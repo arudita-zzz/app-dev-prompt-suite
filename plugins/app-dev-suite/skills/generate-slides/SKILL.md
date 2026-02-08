@@ -1,0 +1,66 @@
+---
+name: generate-slides
+description: Generate Marp presentation slides from phase artifacts for technical review.
+argument-hint: [-s <source_dir>] [-f md|pptx|pdf|html] [-p all|feasibility|design|implementation]
+allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*), Bash(npx, chmod)
+user-invocable: true
+model: sonnet
+---
+
+Generate Marp presentation slides from app-dev-suite phase artifacts.
+
+## Steps
+
+### 0. Initialization
+- Load config: see [conventions](../../conventions.md)
+
+### 1. Resolve Source Directory
+- Parse `-s <path>` from arguments
+- If not specified: Glob `{output_dir}/*/progress.yaml`, sort by mtime
+  - If multiple found: AskUserQuestion to select task directory
+  - If one found: use it
+  - If none found: AskUserQuestion for manual path / Type Anything
+
+### 2. Detect Phases
+- Parse `-p` from arguments (values: `all`, `feasibility`, `design`, `implementation`; comma-separated for multiple)
+- If not specified: auto-detect by checking existence of:
+  - `feasibility_report.md` → feasibility
+  - `solution_design.md` → design
+  - `implementation_report.md` → implementation
+- AskUserQuestion: confirm detected phases / select manually / Type Anything
+
+### 3. Check Output Format
+- Parse `-f` from arguments (default: `md`, from `config.slides.default_format`)
+- If format is not `md`: check Marp CLI availability
+  - Run: `which marp || which npx`
+  - If neither found: warn user, offer install guidance, fallback to `md`
+
+### 4. Extract Content
+Read [content-extraction instructions](steps/content-extraction.md) and execute.
+For each selected phase: read summary + detail artifacts per [slide-format.md](slide-format.md).
+
+### 5. Build Slides
+Assemble Marp markdown per [slide-format.md](slide-format.md):
+- Generate frontmatter from `config.slides.*` settings
+- Include only sections for selected phases
+- Adapt all headings and content to `config.documents.language`
+- Preserve Mermaid code blocks verbatim
+- Respect `config.slides.content_max_lines_per_slide` per slide; if exceeded, delegate to document-summarizer agent
+
+### 6. Write Output
+- Determine task_name from source directory name
+- Save to: `{docs_dir}/{task_name}/slides_{task_name}.md`
+
+### 7. Convert (conditional)
+- If format ≠ `md`: execute `script/convert-slides.sh <input.md> <format>`
+- Report conversion result or error
+
+### 8. Done
+- Display output file path(s)
+- AskUserQuestion: open preview / regenerate with different options / done / Type Anything
+
+## Constraints
+
+- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
+- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Mermaid blocks must never be summarized or modified

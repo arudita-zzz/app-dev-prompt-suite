@@ -162,6 +162,7 @@ flowchart LR
         IT["/implement-tdd"]
         SW["/setup-wizard"]
         SF["/small-feature"]
+        GS["/generate-slides"]
     end
 
     subgraph Background["Background Skills"]

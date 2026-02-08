@@ -27,6 +27,7 @@ After installation, skills are accessible with the `app-dev-suite:` namespace pr
 /app-dev-suite:implement-tdd
 /app-dev-suite:setup-wizard
 /app-dev-suite:small-feature
+/app-dev-suite:generate-slides
 ```
 
 ## Overview
@@ -100,6 +101,7 @@ For smaller tasks that don't need the full three-phase workflow:
 | `implement-tdd` | TDD implementation per subtask with quality gates |
 | `setup-wizard` | Interactive configuration wizard |
 | `small-feature` | All-in-one quick implementation with TDD |
+| `generate-slides` | Marp presentation slides from phase artifacts |
 | `quality-gate` | (Background) Checklists, metrics, gate decisions |
 
 ## Agents
@@ -174,8 +176,14 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   ├── setup-wizard/
         │   │   ├── SKILL.md
         │   │   └── config-template.md
-        │   └── small-feature/
-        │       └── SKILL.md
+        │   ├── small-feature/
+        │   │   └── SKILL.md
+        │   └── generate-slides/
+        │       ├── SKILL.md
+        │       ├── slide-format.md
+        │       └── steps/
+        ├── script/
+        │   └── convert-slides.sh
         ├── agents/
         │   ├── document-summarizer.md
         │   ├── poc-feasibility-expert.md
@@ -202,4 +210,8 @@ app-dev-prompt-suite/                    # Marketplace repository
 # Phase 3: Implementation
 /app-dev-suite:implement-tdd
 # → Produces: {docs_dir}/{task_name}/implementation_report.md
+
+# Generate presentation slides from artifacts
+/app-dev-suite:generate-slides
+# → Produces: {docs_dir}/{task_name}/slides_{task_name}.md
 ```
