@@ -69,15 +69,11 @@ Each `---` separator creates a new slide. Maximum `config.slides.content_max_lin
 - Source: `implementation_report.md`
 - Summary + files changed / tests added
 
-**Slide 12: Quality Metrics**
-- Source: `quality_metrics.md`
-- Preserve table structure
-
-**Slide 13: Issues & Resolutions**
+**Slide 12: Issues & Resolutions**
 - Source: `implementation_report.md` ## Issues Found During Implementation
 
 ### Closing
 
-**Slide 14: Summary & Next Steps**
+**Slide 13: Summary & Next Steps**
 - Aggregate key decisions across included phases
 - List recommended next actions

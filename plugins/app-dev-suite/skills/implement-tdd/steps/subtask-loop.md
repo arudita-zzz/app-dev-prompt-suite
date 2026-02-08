@@ -41,10 +41,8 @@ You are the orchestrator. You design and delegate. The tdd-implementer implement
 
 - TDD cycle: Red → Green → Refactor (executed by tdd-implementer)
 - Capture test runner output (exit code + summary) after Green phase
-- Update metrics: `files_changed`
 
 ## c. Subtask Retrospective
 
 - Record design↔implementation gaps
 - Log issues to `## Issues Found During Implementation`
-- Quality checklist: subtask-level verification

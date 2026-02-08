@@ -41,33 +41,8 @@ agents:
   tdd_implementer: "tdd-implementer"
   web_researcher: "web-research-expert"
   document_summarizer: "document-summarizer"
-  quality_gate_evaluator: "quality-gate-evaluator"
   codebase_investigator: "codebase-investigator"
   explore: "Explore"
-
-quality:
-  enable_metrics: true
-  enable_checklists: true
-  metrics:
-    - files_analyzed
-    - web_research_count
-    - solution_candidates
-    - poc_count
-    - subtask_count
-    - test_case_count
-    - files_changed
-    - issues_found
-  thresholds:
-    feasibility_study:
-      min_files_analyzed: 10
-      min_solution_candidates: 2
-    solution_design:
-      min_subtask_count: 3
-      max_subtask_count: 20
-      min_test_cases: 5
-    implementation:
-      min_test_coverage: 80
-      max_files_changed: 30
 
 document_types:
   feasibility_report:
@@ -97,12 +72,6 @@ document_types:
   subtask_design:
     name: "Subtask Design"
     file_type: "subtask_design"
-  quality_checklist:
-    name: "Quality Checklist"
-    file_type: "quality_checklist"
-  quality_metrics:
-    name: "Quality Metrics"
-    file_type: "quality_metrics"
   slides:
     name: "Presentation Slides"
     file_type: "slides"
@@ -143,7 +112,6 @@ After generation, edit `config.yaml` directly for advanced tuning:
 
 | Section | What you can change |
 |---|---|
-| `quality.thresholds` | Adjust min/max values per phase |
 | `templates.subtask_design` | Toggle design document sections |
 | `templates.scaling` | Grouping threshold, batch design |
 | `documents.naming_pattern` | File naming variables: `{date}`, `{type}`, `{task_name}` |

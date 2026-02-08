@@ -33,10 +33,6 @@
 - [PoC Results](./poc/) *(if conducted)*
 - [References](./references/) *(if web research conducted)*
 
-## Quality Metrics
-
-{metrics summary}
-
 ## Next Actions
 
 1. Review this feasibility report

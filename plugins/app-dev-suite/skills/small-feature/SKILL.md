@@ -9,25 +9,38 @@ Implement the feature spec at `config.feature_spec.path` (default: `.claude/clau
 
 ## Steps
 
-1. Read and understand the spec; investigate current implementation
-2. AskUserQuestion to clarify ambiguities and finalize requirements
-3. If spec demands something infeasible, propose alternatives
-4. If web research needed: delegate to web-research-expert agent, review findings
-5. Re-confirm requirements with user if new questions arose
-6. Present implementation plan to user for approval
-   - If user requests PoC: delegate to poc-feasibility-expert agent, show results
-7. Finalize implementation items
-8. Split into subtasks, present list for user approval
-9. Map subtask dependencies (precedence diagram style)
-10. Propose feature branch strategy; create or wait for user's branch
-11. Checkout the feature branch
-12. Save requirements + subtasks + precedence diagram to `{docs_dir}/{task_name}/solution_design.md`
-    - Default docs_dir: `.claude/claudeRes/docs`
-13. Present the document to user for review/approval
-14. Incorporate user feedback into final plan
-15. Submit the document to tdd-implementer agent; implement subtasks in dependency order via TDD
-16. On completion: save implementation report to `{docs_dir}/{task_name}/dev_final.md`
-    - Append PR Description: Background / Main Changes / Notes (3-10 lines each)
+### 1. Read & Investigate
+- Read and understand the spec
+- Investigate current implementation
+
+### 2. Clarify
+- AskUserQuestion to clarify ambiguities and finalize requirements
+- If spec demands something infeasible, propose alternatives
+- If web research needed: delegate to web-research-expert agent, review findings
+- Re-confirm requirements with user if new questions arose
+
+### 3. Plan & Approve
+- Present implementation plan to user
+- AskUserQuestion: approve / request PoC / modify
+  - PoC → delegate to poc-feasibility-expert agent, show results, return to plan
+- Finalize implementation items
+
+### 4. Design Subtasks & Approve
+- Split into subtasks; map dependencies (precedence diagram style)
+- Save to `{docs_dir}/{task_name}/solution_design.md` (default docs_dir: `.claude/claudeRes/docs`)
+- AskUserQuestion: approve / request changes
+- Incorporate feedback
+
+### 5. Branch Setup
+- Propose feature branch; create or wait for user's branch
+- Checkout the feature branch
+
+### 6. Implement
+Delegate to tdd-implementer agent; implement subtasks in dependency order via TDD.
+
+### 7. Report
+- Save implementation report to `{docs_dir}/{task_name}/dev_final.md`
+- Append PR Description: Background / Main Changes / Notes (3-10 lines each)
 
 ## Constraints
 

@@ -53,10 +53,6 @@ graph LR
 - [Subtask Details](./solution_details/subtasks.md)
 - [File Changes](./solution_details/file_changes/)
 
-## Quality Metrics
-
-{metrics summary}
-
 ## Next Actions
 
 1. Review this solution design

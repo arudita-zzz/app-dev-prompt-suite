@@ -5,7 +5,7 @@ argument-hint: [message]
 allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*)
 ---
 
-You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge. 
+You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge.
 You are the budddy with the user, who is a senior engineer.
 Therefore, you must consult with the user for every decision.
 
@@ -13,58 +13,36 @@ Conduct a feasibility study based on the spec at `config.feature_spec.path` (def
 
 ## Steps
 
-### 0. Initialization
+### 0. Init
 - Load config: see [conventions](../../conventions.md)
 - Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
-- Initialize metrics tracker for this task
-
-### 1. Task Name and Output Path
 - Format task name per `config.task_naming.pattern` (default: `{type}-{jira_id}-{brief_desc}`)
   - If `config.task_naming.jira.enabled`: AskUserQuestion for JIRA ID
   - If JIRA disabled: use `{type}-{brief_desc}` pattern
-- Output path: `{output_dir}/{task_name}/feasibility_report.md`
+- Set output path: `{output_dir}/{task_name}/feasibility_report.md`
 - TaskCreate: `Feasibility Study: <task-name>`
 
-### 2. Ultrathink Mode
-AskUserQuestion: use ultrathink for deep analysis? (Yes / No)
+### 1. Investigate
+Read [investigation instructions](steps/investigation.md) and execute (parallel: codebase-investigator + web-research-expert).
 
-### 3. Codebase & Research Investigation (parallel)
-Read [investigation instructions](steps/investigation.md) and execute.
-Update metrics: `files_analyzed` count.
+### 2. Clarify & Propose
+- AskUserQuestion for any unclear requirements
+- Build list of implementation approach candidates
+- Use document-summarizer agent to create max 100-line summary of candidates; display to user
 
-### 4. Clarification
-AskUserQuestion for any unclear requirements.
-
-### 5. Solution Candidates
-Build list of implementation approach candidates.
-
-### 6. Candidate Summary
-Use document-summarizer agent to create max 100-line summary of candidates.
-Display to user. Update metrics: `solution_candidates` count.
-
-### 7. Approach Selection
+### 3. Select Approach
 Read [approach selection instructions](steps/approach-selection.md) and execute.
 
-### 8. Final Report
-Use document-summarizer to create max 100-line summary.
-Save hierarchical docs:
-- `{docs_dir}/{task_name}/feasibility_report.md` — summary (max 100 lines), format per `report-format.md`
-- `{docs_dir}/{task_name}/feasibility_details/` — see `details-format.md`
+### 4. Report
+- Use document-summarizer to create max 100-line summary
+- Save hierarchical docs:
+  - `{docs_dir}/{task_name}/feasibility_report.md` — summary (max 100 lines), format per `report-format.md`
+  - `{docs_dir}/{task_name}/feasibility_details/` — see `details-format.md`
 
-### 9. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=feasibility_study, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence, evaluates against thresholds
-- Agent returns: structured quality report with recommendation
-- Present report to user
-- AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
-- Block → fix issues; Warn → record concerns, proceed
-
-### 10. Metrics & Completion
-- Record completion timestamp and save metrics report
-- Display metrics summary
+### 5. Complete
+- Update `progress.yaml`: set feasibility_study to completed, record output path
 - TaskUpdate: mark completed
 - TaskCreate: `Solution Design: <task-name>` as next step
-- Update `progress.yaml`: set feasibility_study to completed, record output path
 - Display next phase command:
   ```
   Next: /app-dev-suite:solution-design -s {path-to-feasibility-report}

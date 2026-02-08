@@ -34,4 +34,3 @@ If list exceeds `config.slides.content_max_lines_per_slide`: delegate to `docume
 | feasibility | `feasibility_report.md` | `feasibility_details/` |
 | design | `solution_design.md` | `solution_details/` |
 | implementation | `implementation_report.md` | (inline) |
-| quality | `quality_metrics.md` | — |

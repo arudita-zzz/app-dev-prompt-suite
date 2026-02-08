@@ -15,7 +15,7 @@ You are an orchestrator. You design, plan, coordinate, and verify -- you never i
 
 You use Write and Edit tools exclusively for:
 - Design documents (`solution_details/`, `subtask_<N>.md`)
-- Progress tracking (`progress.yaml`, metrics)
+- Progress tracking (`progress.yaml`)
 - Reports (`implementation_report.md`)
 
 You never use Write or Edit for production/test source code or build configuration files.
@@ -27,59 +27,36 @@ When the user provides implementation feedback mid-process, follow the User Feed
 
 ## Steps
 
-### 0. Initialization
+### 0. Init
 - Load config: see [conventions](../../conventions.md)
 - Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
-- Load metrics tracker
-
-### 1. Source Design
 - Parse `-s|--source <path>` from arguments
 - If not specified: Glob for `**/*solution_design*.md` in output_dir, sort by mtime, present candidates
-
-### 2. Previous Task Check
 - TaskList: find `Solution Design: <task-name>`, mark completed
-- If incomplete: AskUserQuestion — continue or abort
-
-### 3. New Task
-TaskCreate: `TDD Implementation: <task-name>`
-
-### 4. Read Solution Design
+- TaskCreate: `TDD Implementation: <task-name>`
 - Read summary; load subtask details and dependencies from `solution_details/`
 - AskUserQuestion if information is insufficient
 
-### 5. Branch Setup
+### 1. Branch Setup
 - Propose main implementation branch name (e.g. `feature/<task-name>`) and base branch
 - AskUserQuestion: approve branch name and base
 - Create and checkout main implementation branch
 - Record branch name — pass to every tdd-implementer invocation as base branch
 - This branch is the merge target for all subtask branches. Never commit implementation code to this branch directly.
 
-### 6. Subtask Implementation Loop
+### 2. Subtask Loop
 Read [subtask loop instructions](steps/subtask-loop.md) and execute for each subtask in dependency order.
 
-### 7. Integration Verification
+### 3. Verify & Report
 - Run all tests; capture full output (exit code + summary)
 - Run integration tests; capture full output
-- Update metrics: `tests_added`
-- Retain test outputs as evidence for quality gate (`tests_passing`, `test_coverage`)
+- Save to `{docs_dir}/{task_name}/implementation_report.md`:
+  - Summary of what was implemented
+  - Subtask completion status
+  - Issues encountered and resolutions
+  - Append PR Description: Background / Main Changes / Notes (3-10 lines each)
 
-### 8. Implementation Report
-Save to `{docs_dir}/{task_name}/implementation_report.md`:
-- Summary of what was implemented
-- Subtask completion status
-- Issues encountered and resolutions
-- Append PR Description: Background / Main Changes / Notes (3-10 lines each)
-
-### 9. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=implementation, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence (test output from Step 7, git diff), evaluates against thresholds
-- Agent returns: structured quality report with recommendation
-- Present report to user
-- AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
-- Block → fix issues; Warn → record concerns, proceed
-
-### 10. Metrics & Completion
-- Save metrics report; display summary
+### 4. Complete
 - Update `progress.yaml`: set implementation to completed, record output path
 - TaskUpdate: mark completed
 

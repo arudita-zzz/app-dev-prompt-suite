@@ -16,30 +16,6 @@ Generate all documents in `config.documents.language`.
 
 Template files serve as structural references. Adapt headings and content to the configured language.
 
-## Document Update Confirmation
-
-When updating existing documents, present diff format for user approval before writing:
-
-```
-=== Document Update Confirmation ===
-
-File: {document_file_path}
-
-Changes Summary:
-- {change 1}
-- {change 2}
-
---- Before ---
-{existing content being changed}
-
---- After ---
-{updated content}
-
-=== End of Update Preview ===
-```
-
-Only update after user approval.
-
 ## Phase Progress Tracking
 
 On skill completion: save `{docs_dir}/{task_name}/progress.yaml` with task_name, current_phase, and per-phase status/output/completed_at.

@@ -80,53 +80,11 @@ agents:
   # Agent for document summarization
   document_summarizer: "document-summarizer"
 
-  # Agent for quality gate evaluation at phase boundaries
-  quality_gate_evaluator: "quality-gate-evaluator"
-
   # Agent for deep codebase investigation (3-phase iterative exploration)
   codebase_investigator: "codebase-investigator"
 
   # Agent for codebase exploration (Tier 1: Parallel Investigation)
   explore: "Explore"
-
-# Quality Management settings (Tier 2)
-quality:
-  # Enable quality metrics tracking
-  enable_metrics: true
-  # Enable quality checklists at phase boundaries
-  enable_checklists: true
-  # Metrics to track
-  metrics:
-    - files_analyzed
-    - web_research_count
-    - solution_candidates
-    - poc_count
-    - subtask_count
-    - test_case_count
-    - files_changed
-    - issues_found
-
-  # v3.0: Externalized Quality Thresholds
-  thresholds:
-    feasibility_study:
-      # Minimum files that should be analyzed
-      min_files_analyzed: 10
-      # Minimum solution candidates to consider
-      min_solution_candidates: 2
-
-    solution_design:
-      # Minimum subtasks for proper task breakdown
-      min_subtask_count: 3
-      # Maximum subtasks before requiring grouping
-      max_subtask_count: 20
-      # Minimum test cases to plan
-      min_test_cases: 5
-
-    implementation:
-      # Minimum test coverage percentage
-      min_test_coverage: 80
-      # Maximum files changed in single implementation
-      max_files_changed: 30
 
 # Document type definitions
 # Maps document types to their display names and file type identifiers
@@ -167,14 +125,6 @@ document_types:
   subtask_design:
     name: "Subtask Design"
     file_type: "subtask_design"
-
-  quality_checklist:
-    name: "Quality Checklist"
-    file_type: "quality_checklist"
-
-  quality_metrics:
-    name: "Quality Metrics"
-    file_type: "quality_metrics"
 
   slides:
     name: "Presentation Slides"

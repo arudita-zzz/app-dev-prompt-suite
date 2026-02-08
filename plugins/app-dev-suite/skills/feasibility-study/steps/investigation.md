@@ -11,5 +11,5 @@ Launch 2 parallel Task agents:
    - Search for industry best practices, library documentation, and known solutions
    - Include version info and retrieval date in findings
 
-Receive codebase investigation report. Update metrics: `files_analyzed` from report.
+Receive codebase investigation report.
 Merge codebase investigation report with web research results into comprehensive analysis.
