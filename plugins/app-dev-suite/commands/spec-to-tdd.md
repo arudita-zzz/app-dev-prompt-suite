@@ -3,42 +3,42 @@ argument-hint: [message]
 description: Implement feature/bugfix/tech improvement with a TDD approach
 ---
 
-.claude/claudeRes/scripts/feature_spec.md に書かれたスペックに基づき、
-下記の手順と制約に従い TDD で実装を進めてください
+Based on the spec in `.claude/claudeRes/scripts/feature_spec.md`, follow the phases below to implement via TDD.
 
-## 手順
+### Phase 1 — Requirements & Research
 
-1. スペックの理解、現状の実装確認
-2. 実装のために必要な確認事項をユーザに確認し、スペックを明確化
-3. (スペックに通常の手段では実装できない突飛な指定があれば代替案を提示)
-4. WEB での調査が必要なら、修正要件を web-research-agent に伝え、実装法を調査・提案してもらう
-5. web-research-agent のレポートを確認
-6. この時点で新たに必要な確認事項が発見されたならユーザに確認し、修正要件を再度明確化
-7. 実装の方針をユーザに提示し、承認を得る
-   - ユーザに PoC を要求されたら poc-feasibility-expert subagent を呼び出して PoC を実行し、その結果をユーザに提示
-8. 実装項目の確定
-9. 実装項目を適切なサブタスクに分割し、リストアップしてユーザの承認を得る
-10. プレシデンス・ダイアグラム法の要領でサブタスクの依存関係を整理
-11. feature のためのブランチをどこにどう作るか提示し、その通り作成するか、ユーザが手動で作成するのを促しユーザのブランチ作成を待つ
-12. 作成した feature のブランチにチェックアウト
-13. 要件、実装項目、サブタスク一覧とプレシデンス・ダイアグラムをまとめて、マークダウンファイルに保存(<YY_MM_DD>\_solution*design*<appropriate-task-name>.md)
-    - Save Location: `.claude/claudeRes/docs` (.claude は project-level のもの)
-    - もし上のパスが存在しなければ `.claude/claudeRes/docs` ディレクトリを新たに作成し、そこに保存
-14. ユーザにマークダウンファイルを提出し、修正/承認を促す。
-15. 修正されたマークダウンファイルを確認し、最終方針を認識
-16. マークダウンファイルを tdd-implementer subagent に提出し、プレシデンス・ダイアグラムの先頭から、各サブタスクに対して順々に TDD で実装してもらう
-17. TDD 実装が完了したらユーザに完了を報告,実装レポートを`.claude/claudeRes/docs` ディレクトリにマークダウンファイルで作成(<YY_MM_DD>\_dev*final*<appropriate-task-name>.md)
-    - 末尾に Pull Request の Description にコピー&ペーストで使える簡潔な説明文を追加すること: Background, Main Changes, Notes の 3 章構成。各章 3-6 行程度、最大でも 10 行程度。
+1. Analyze the spec. Launch Explore subagent(s) to investigate the current codebase. Clarify ambiguities with the user.
+2. If the spec contains infeasible requirements, propose alternatives.
+3. If web research is needed, delegate to `web-research-agent` with the requirements. Review the report and re-clarify with the user if new questions arise.
 
-## 制約
+### Phase 2 — Solution Design
 
-1. 確たるソリューションが見つからない複雑な問題に対しては、poc-feasibility-expert subagent を呼び出し、poc を実施してもらってください
-2. TDDによるアプローチが過剰な場合は、ユーザにその旨を伝え、了承を得た上でより簡素なアプローチで実装を行うこと。
+4. Present the implementation approach to the user and get approval.
+   - If the user requests a PoC, invoke `poc-feasibility-expert` subagent, then present results.
+5. Finalize implementation items. Break them into subtasks and map dependencies using a precedence diagram.
+6. Present the subtask list with the precedence diagram to the user and get approval.
 
+### Phase 3 — Branch & Design Document
 
-## ドキュメント更新確認フォーマット
+7. Propose a feature branch name and location. Either create it or prompt the user to create it manually, then check out.
+8. Save a design document (requirements, implementation items, subtask list, precedence diagram) as a Markdown file:
+   - Path: `.claude/claudeRes/docs/<YY_MM_DD>_solution_design_<name>.md` (create the directory if it does not exist)
+   - Submit the document to the user for review and approval. Incorporate any revisions and confirm the final plan.
 
-既存のドキュメント更新時は、以下のフォーマットで変更内容を出力し、変更前にユーザに承認を求める:
+### Phase 4 — TDD Implementation
+
+9. Hand off the approved design document to `tdd-implementer` subagent. Execute subtasks in precedence-diagram order via TDD.
+10. Report completion to the user. Save a final report as `.claude/claudeRes/docs/<YY_MM_DD>_dev_final_<name>.md`.
+    - Append a PR description section at the end: **Background**, **Main Changes**, **Notes** — each 3-6 lines, 10 lines max.
+
+## Rules
+
+- Use `poc-feasibility-expert` for uncertain or complex problems where no clear solution exists.
+- If TDD is overkill for the task, inform the user and propose a simpler approach with their approval.
+
+## Appendix: Document Update Confirmation Format
+
+When updating an existing document, output the following format and get user approval before applying changes:
 
 ```
 === Document Update Confirmation ===
@@ -46,17 +46,17 @@ description: Implement feature/bugfix/tech improvement with a TDD approach
 File: {document_file_path}
 
 Changes Summary:
-- {変更項目1の一文説明}
-- {変更項目2の一文説明}
-- {変更項目3の一文説明}
+- {one-line description of change 1}
+- {one-line description of change 2}
+- {one-line description of change 3}
 
 --- Before ---
-{変更される既存の内容}
+{existing content to be changed}
 
 --- After ---
-{更新後の内容}
+{updated content}
 
 === End of Update Preview ===
 ```
 
-承認後にのみドキュメントを更新する。
+Apply the update only after approval.
