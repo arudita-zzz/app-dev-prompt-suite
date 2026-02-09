@@ -1,41 +1,15 @@
 > Structural reference. Adapt headings to the document language (see conventions.md).
 
-# Feasibility Report Format (max 100 lines)
+# Feasibility Report Format
 
-```markdown
-# Feasibility Report: {task-name}
+## Requirement Detail
+{Detailed Description of what is required.}
 
-**Created:** {date}
-**Next step:** `/app-dev-suite:solution-design -s <this-file>`
+## Investigation Result
+{Summary of Investigation Result}
 
-## Requirements
+## Implementation Strategy
+{Overview of Implementation}
 
-{requirements summary — max 20 lines}
-
-## Implementation Candidates
-
-- Candidate 1: {summary}
-- Candidate 2: {summary}
-- Candidate 3: {summary}
-
-## Chosen Approach
-
-{final approach — max 20 lines}
-
-## Rationale
-
-{investigation results and selection reasoning — max 30 lines}
-
-## Details
-
-- [Codebase Analysis](./feasibility_details/codebase_analysis.md)
-- [Alternatives Comparison](./feasibility_details/alternatives.md)
-- [PoC Results](./poc/) *(if conducted)*
-- [References](./references/) *(if web research conducted)*
-
-## Next Actions
-
-1. Review this feasibility report
-2. Run the following command to proceed:
-   `/app-dev-suite:solution-design -s {actual-output-path}`
-```
+## Detailed Implementation Plan
+{Step-by-step Detailed Implementation Plan}

@@ -16,28 +16,31 @@ Conduct a feasibility study based on the spec at `.claude/claudeRes/scripts/feat
 ### 0. Init
 - Read [conventions](../../conventions.md) for defaults
 - Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
-- Format task name: `{type}-{brief_desc}`
-- Set output path: `{docs_dir}/{task_name}/feasibility_report.md`
+- AskUserQuestion for task_name
+- Set output path: `{docs_dir}/{task_name}/feasibility
 - TaskCreate: `Feasibility Study: <task-name>`
 
-### 1. Investigate
+### 1. Clarify the Requirements
+- AskUserQuestion for any unclear requirements
+
+### 2. Investigate
 Read [investigation instructions](steps/investigation.md) and execute (parallel: codebase-investigator + web-research-expert).
 
-### 2. Clarify & Propose
+### 3. Clarify & Propose
 - AskUserQuestion for any unclear requirements
 - Build list of implementation approach candidates
 - Use document-summarizer agent to create max 100-line summary of candidates; display to user
 
-### 3. Select Approach
+### 4. Select Approach
 Read [approach selection instructions](steps/approach-selection.md) and execute.
 
-### 4. Report
+### 5. Report
+- Create and ave the comprehensive report document:
+  - `{docs_dir}/{task_name}/feasibility/feasibility_report.md` — see [report format](report-format.md)
 - Use document-summarizer to create max 100-line summary
-- Save hierarchical docs:
-  - `{docs_dir}/{task_name}/feasibility_report.md` — summary (max 100 lines), format per `report-format.md`
-  - `{docs_dir}/{task_name}/feasibility_details/` — see `details-format.md`
+- Display the summary to the terminal
 
-### 5. Complete
+### 6. Complete
 - Update `progress.yaml`: set feasibility_study to completed, record output path
 - TaskUpdate: mark completed
 - TaskCreate: `Solution Design: <task-name>` as next step
@@ -50,5 +53,5 @@ Read [approach selection instructions](steps/approach-selection.md) and execute.
 ## Constraints
 
 - DRY: reuse existing code
-- Docs dir: `.claude/claudeRes/docs`
+- Docs dir: `.claude/claudeRes/docs` (.claude is project-level one)
 - Document language: see [conventions](../../conventions.md)

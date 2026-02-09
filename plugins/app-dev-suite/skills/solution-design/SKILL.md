@@ -22,7 +22,7 @@ Create a detailed solution design for TDD implementation based on the feasibilit
 - TaskCreate: `Solution Design: <task-name>`
 
 ### 1. Analyze
-- Read summary report; load details from `feasibility_details/` as needed
+- Read summary report; load details from `feasibility/` as needed
 - Organize requirements
 - List major implementation items
 - Define high-level test cases (details deferred to implementation)
