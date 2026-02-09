@@ -1,21 +1,32 @@
 > Structural reference. Adapt headings to the document language (see conventions.md).
 
-# Solution Design Format
+# Solution Design
 
 ## Requirements
-{requirements summary}
+{Organized from feasibility report. Numbered. Group by functional area if appropriate.}
+
+## Design Decisions
+{Key architectural and technical decisions informed by codebase investigation. Each: decision, rationale, alternatives rejected.}
 
 ## Implementation Items
-{data/domain/UI layer changes}
-
-## Risks / Concerns
-{risks}
+{Major changes by layer (data / domain / UI). Per item: what changes and why.}
 
 ## Subtask List
-{numbered list with dependencies, scope, acceptance criteria per subtask}
+
+Per subtask:
+
+### S{N}: {name}
+- **Summary**: {what this subtask accomplishes}
+- **Effort**: {S/M/L}
+- **Dependencies**: blocks {list} / blocked-by {list}
+- **Scope**: {files to create or modify}
+- **Acceptance Criteria**: {verifiable conditions for completion}
 
 ## Precedence Diagram
-{Mermaid diagram}
+{Mermaid flowchart showing subtask dependency flow. Node labels: S{N} short name.}
 
 ## High-Level Test Cases
-{test cases with subtask mapping}
+{Test cases with target behavior and related subtask number(s). Table: ID | Description | Type (unit/integration) | Subtask.}
+
+## Risks / Concerns
+{Identified risks with mitigation approach. Include feasibility-report constraints that affect design.}

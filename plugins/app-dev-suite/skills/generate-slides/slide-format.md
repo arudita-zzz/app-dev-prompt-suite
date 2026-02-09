@@ -29,51 +29,55 @@ Each `---` separator creates a new slide. Maximum 12 content lines per slide.
 ### Phase 1 — Feasibility Study (conditional: feasibility artifacts exist)
 
 **Slide 2: Requirements**
-- Source: `feasibility/feasibility_report.md` ## Requirement Detail
+- Source: `feasibility/feasibility_report.md` ## Requirements
 - Max 8 bullet points
 
-**Slide 3: Investigation Result**
-- Source: `feasibility/feasibility_report.md` ## Investigation Result
+**Slide 3: Investigation**
+- Source: `feasibility/feasibility_report.md` ## Codebase Investigation + ## External Research
 - Key findings only
 
-**Slide 4: Implementation Strategy**
-- Source: `feasibility/feasibility_report.md` ## Implementation Strategy
-- Preserve table structure; condense if > 8 rows
+**Slide 4: Selected Approach**
+- Source: `feasibility/feasibility_report.md` ## Selected Approach
+- Include selection rationale and PoC results if present
 
-**Slide 5: Detailed Implementation Plan**
-- Source: `feasibility/feasibility_report.md` ## Detailed Implementation Plan
+**Slide 5: Assumptions & Constraints**
+- Source: `feasibility/feasibility_report.md` ## Assumptions & Constraints
 
 ### Phase 2 — Solution Design (conditional: solution design artifacts exist)
 
-**Slide 6: Implementation Overview**
+**Slide 6: Design Decisions**
+- Source: `design/solution_design.md` ## Design Decisions
+- Key decisions with rationale
+
+**Slide 7: Implementation Overview**
 - Source: `design/solution_design.md` ## Implementation Items
 
-**Slide 7: Subtask Breakdown**
+**Slide 8: Subtask Breakdown**
 - Source: `design/solution_design.md` ## Subtask List
 - Numbered list
 
-**Slide 8: Dependency Diagram**
+**Slide 9: Dependency Diagram**
 - Source: `design/solution_design.md` ## Precedence Diagram
 - Mermaid block: preserve verbatim
 
-**Slide 9: Test Strategy**
+**Slide 10: Test Strategy**
 - Source: `design/solution_design.md` ## High-Level Test Cases
 - Condensed summary
 
-**Slide 10: Risks**
+**Slide 11: Risks**
 - Source: `design/solution_design.md` ## Risks / Concerns
 
 ### Phase 3 — Implementation (conditional: implementation artifacts exist)
 
-**Slide 11: Implementation Results**
+**Slide 12: Implementation Results**
 - Source: `implementation/implementation_report.md`
 - Summary + files changed / tests added
 
-**Slide 12: Issues & Resolutions**
+**Slide 13: Issues & Resolutions**
 - Source: `implementation/implementation_report.md` ## Issues Found During Implementation
 
 ### Closing
 
-**Slide 13: Summary & Next Steps**
+**Slide 14: Summary & Next Steps**
 - Aggregate key decisions across included phases
 - List recommended next actions
