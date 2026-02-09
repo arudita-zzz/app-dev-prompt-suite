@@ -5,24 +5,22 @@ argument-hint: [message]
 allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*)
 ---
 
-You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge. 
+You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge.
 You are the budddy with the user, who is a senior engineer.
 Therefore, you must consult with the user for every decision.
 
-Conduct a feasibility study based on the spec at `config.feature_spec.path` (default: `.claude/claudeRes/scripts/feature_spec.md`).
+Conduct a feasibility study based on the spec at `.claude/claudeRes/scripts/feature_spec.md`.
 
 ## Steps
 
 ### 0. Initialization
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
+- Read [conventions](../../conventions.md) for defaults
+- Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
 - Initialize metrics tracker for this task
 
 ### 1. Task Name and Output Path
-- Format task name per `config.task_naming.pattern` (default: `{type}-{jira_id}-{brief_desc}`)
-  - If `config.task_naming.jira.enabled`: AskUserQuestion for JIRA ID
-  - If JIRA disabled: use `{type}-{brief_desc}` pattern
-- Output path: `{output_dir}/{task_name}/feasibility_report.md`
+- Format task name: `{type}-{brief_desc}`
+- Output path: `{docs_dir}/{task_name}/feasibility_report.md`
 - TaskCreate: `Feasibility Study: <task-name>`
 
 ### 2. Ultrathink Mode
@@ -52,8 +50,8 @@ Save hierarchical docs:
 - `{docs_dir}/{task_name}/feasibility_details/` — see `details-format.md`
 
 ### 9. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=feasibility_study, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence, evaluates against thresholds
+- Launch quality-gate-evaluator agent with: phase=feasibility_study, docs_dir, task_name
+- Agent independently reads artifacts, collects evidence, evaluates
 - Agent returns: structured quality report with recommendation
 - Present report to user
 - AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
@@ -74,5 +72,5 @@ Save hierarchical docs:
 ## Constraints
 
 - DRY: reuse existing code
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)

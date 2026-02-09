@@ -16,5 +16,5 @@
 
 4. Update metrics: `subtask_count`, `dependency_depth`
 
-5. If subtask count exceeds `config.quality.thresholds.solution_design.max_subtask_count`:
+5. If subtask count exceeds 20:
    apply scaling strategies from [scaling-strategies.md](../../implement-tdd/scaling-strategies.md)

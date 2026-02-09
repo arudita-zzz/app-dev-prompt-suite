@@ -1,20 +1,22 @@
 # app-dev-suite Conventions
 
-## Configuration Loading
+## Defaults
 
-Load configuration at the start of each skill:
-1. Read `.claude/config.yaml` (user config, if exists)
-2. Read [default config](config.default.yaml) (bundled defaults)
-3. Merge: user config overrides defaults (deep merge)
-4. Resolve `output_dir` to absolute path if relative
+| Setting | Value |
+|---|---|
+| docs_dir | `.claude/claudeRes/docs` |
+| feature_spec_path | `.claude/claudeRes/scripts/feature_spec.md` |
+| language | `"auto"` — detect from feature spec. If undetectable, use user message language. |
+
+To customize: edit this table directly.
 
 ## Document Language
 
-Generate all documents in `config.documents.language`.
-- `"auto"`: detect language from the feature spec at `config.feature_spec.path`. If undetectable, use the language of user messages.
+Generate all documents in the language specified above.
+- `"auto"`: detect from the feature spec at `feature_spec_path`. If undetectable, use the language of user messages.
 - Specific code (e.g. `"ja"`, `"en"`): use that language.
 
-Template files serve as structural references. Adapt headings and content to the configured language.
+Template files serve as structural references. Adapt headings and content to the document language.
 
 ## Document Update Confirmation
 

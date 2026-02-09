@@ -1,4 +1,4 @@
-> Structural reference. Adapt headings to `config.documents.language`.
+> Structural reference. Adapt headings to the document language (see conventions.md).
 
 # Feasibility Report Format (max 100 lines)
 

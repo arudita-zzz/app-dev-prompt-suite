@@ -5,7 +5,7 @@ argument-hint: [-s|--source <feasibility-report-file-path>]
 allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*)
 ---
 
-You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge. 
+You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge.
 You are the budddy with the user, who is a senior engineer.
 Therefore, you must consult with the user for every decision.
 
@@ -14,13 +14,13 @@ Create a detailed solution design for TDD implementation based on the feasibilit
 ## Steps
 
 ### 0. Initialization
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
+- Read [conventions](../../conventions.md) for defaults
+- Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
 - Load or create metrics tracker
 
 ### 1. Source Report
 - Parse `-s|--source <path>` from arguments
-- If not specified: Glob for `**/*feasibility_report*.md` in output_dir, sort by mtime, present candidates to user
+- If not specified: Glob for `**/*feasibility_report*.md` in docs_dir, sort by mtime, present candidates to user
 
 ### 2. Previous Task Check
 - TaskList: find `Feasibility Study: <task-name>`, mark completed
@@ -62,8 +62,8 @@ Use document-summarizer agent to summarize and display to user.
 Read [approval loop instructions](steps/approval-loop.md) and execute.
 
 ### 12. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=solution_design, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence, evaluates against thresholds
+- Launch quality-gate-evaluator agent with: phase=solution_design, docs_dir, task_name
+- Agent independently reads artifacts, collects evidence, evaluates
 - Agent returns: structured quality report with recommendation
 - Present report to user
 - AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
@@ -82,5 +82,5 @@ Read [approval loop instructions](steps/approval-loop.md) and execute.
 
 ## Constraints
 
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)

@@ -28,13 +28,13 @@ When the user provides implementation feedback mid-process, follow the User Feed
 ## Steps
 
 ### 0. Initialization
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
+- Read [conventions](../../conventions.md) for defaults
+- Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
 - Load metrics tracker
 
 ### 1. Source Design
 - Parse `-s|--source <path>` from arguments
-- If not specified: Glob for `**/*solution_design*.md` in output_dir, sort by mtime, present candidates
+- If not specified: Glob for `**/*solution_design*.md` in docs_dir, sort by mtime, present candidates
 
 ### 2. Previous Task Check
 - TaskList: find `Solution Design: <task-name>`, mark completed
@@ -71,8 +71,8 @@ Save to `{docs_dir}/{task_name}/implementation_report.md`:
 - Append PR Description: Background / Main Changes / Notes (3-10 lines each)
 
 ### 9. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=implementation, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence (test output from Step 7, git diff), evaluates against thresholds
+- Launch quality-gate-evaluator agent with: phase=implementation, docs_dir, task_name
+- Agent independently reads artifacts, collects evidence (test output from Step 7, git diff), evaluates
 - Agent returns: structured quality report with recommendation
 - Present report to user
 - AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
@@ -86,8 +86,8 @@ Save to `{docs_dir}/{task_name}/implementation_report.md`:
 ## Constraints
 
 - TDD overkill → inform user, get approval for simpler approach
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)
 - Orchestrator boundary: never write or edit production/test source code directly. All code changes are delegated to tdd-implementer via the Task tool.
 - User feedback during implementation: follow User Feedback Routing in subtask-loop.md Phase b. Capture → update design → re-delegate. Never implement directly.
 - Branch discipline: the orchestrator never commits code to the main implementation branch. All code arrives via subtask branch merges performed by tdd-implementer after user approval.

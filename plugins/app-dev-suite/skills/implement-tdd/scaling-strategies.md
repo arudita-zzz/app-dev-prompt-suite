@@ -1,10 +1,8 @@
 # Scaling Strategies for 20+ Subtasks
 
-When `subtask_count` exceeds `config.quality.thresholds.solution_design.max_subtask_count` (default: 20):
+When `subtask_count` exceeds 20:
 
 ## Subtask Grouping
-
-**When:** `config.templates.scaling.enable_subtask_grouping = true`
 
 Group related subtasks by logical unit (e.g., "Authentication", "UI Components", "Data Layer").
 - Design, implement, and review per group
@@ -12,8 +10,6 @@ Group related subtasks by logical unit (e.g., "Authentication", "UI Components",
 - Common implementation approach per group
 
 ## Batch Design
-
-**When:** `config.templates.scaling.enable_batch_design = true`
 
 Design similar-pattern subtasks together:
 - Define common approach first

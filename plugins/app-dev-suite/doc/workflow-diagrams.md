@@ -41,7 +41,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Start(["/feasibility-study"]) --> Init["0. Config読込\nMetrics初期化"]
+    Start(["/feasibility-study"]) --> Init["0. conventions.md読込\nMetrics初期化"]
     Init --> TaskName["1. タスク名決定\n出力パス設定"]
     TaskName --> Ultra{"2. Ultrathink\n使用?"}
     Ultra --> Investigate
@@ -80,7 +80,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start(["/solution-design"]) --> Init["0. Config読込\nMetrics読込"]
+    Start(["/solution-design"]) --> Init["0. conventions.md読込\nMetrics読込"]
     Init --> Source["1. Feasibility Report\n取得 (-s or 自動検出)"]
     Source --> PrevTask["2. 前タスク確認\n完了処理"]
     PrevTask --> NewTask["3. タスク作成"]
@@ -120,7 +120,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start(["/implement-tdd"]) --> Init["0. Config読込\nMetrics読込"]
+    Start(["/implement-tdd"]) --> Init["0. conventions.md読込\nMetrics読込"]
     Init --> Source["1. Solution Design\n取得 (-s or 自動検出)"]
     Source --> PrevTask["2. 前タスク確認"]
     PrevTask --> NewTask["3. タスク作成"]
@@ -177,16 +177,15 @@ flowchart LR
         DS["document-summarizer\n要約生成"]
     end
 
-    subgraph Config["Configuration"]
-        CD["config.default.yaml"]
-        CU["config.yaml (user)"]
+    subgraph Conventions["Conventions"]
+        CV["conventions.md\nDefaults テーブル"]
     end
 
     Skills --> Background
     Skills --> Agents
-    Config -.->|"Step 0で読込"| Skills
+    Conventions -.->|"Step 0で読込"| Skills
 
     style Background fill:#f3e5f5,stroke:#9C27B0
     style Agents fill:#e0f2f1,stroke:#009688
-    style Config fill:#fafafa,stroke:#9E9E9E
+    style Conventions fill:#fafafa,stroke:#9E9E9E
 ```
