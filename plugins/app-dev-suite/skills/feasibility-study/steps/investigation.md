@@ -4,7 +4,7 @@ Launch 2 parallel Task agents:
 
 1. **Task 1** (codebase-investigator agent): Codebase exploration
    - investigation_type: feasibility
-   - feature_spec_path: config.feature_spec.path
+   - feature_spec_path: `.claude/claudeRes/scripts/feature_spec.md` (see conventions.md)
    - docs_dir, task_name
 
 2. **Task 2** (web-research-expert agent): Research best practices

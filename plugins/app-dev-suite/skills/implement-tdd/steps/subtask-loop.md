@@ -7,7 +7,7 @@ For each subtask (in dependency order):
 - Read subtask overview from `solution_details/subtasks.md`
 - If needed: launch Explore agent for deeper file investigation
 - Define detailed unit/integration test cases
-- Use subtask design template (read from `solution-design/subtask-design-template.md` if config enables templates)
+- Use subtask design template (read from `solution-design/subtask-design-template.md`)
 - **Scaling (20+ subtasks):** apply grouping or batch design per [scaling-strategies.md](../scaling-strategies.md)
 - Save: `{docs_dir}/{task_name}/solution_details/file_changes/subtask_<N>.md`
 - AskUserQuestion: approve detailed design

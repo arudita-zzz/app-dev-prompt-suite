@@ -2,7 +2,7 @@
 
 Launch codebase-investigator agent:
 - investigation_type: design
-- feature_spec_path: config.feature_spec.path
+- feature_spec_path: `.claude/claudeRes/scripts/feature_spec.md` (see conventions.md)
 - target_files: {files identified in initial design (Step 5)}
 - docs_dir, task_name
 

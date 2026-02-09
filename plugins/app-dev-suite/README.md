@@ -75,7 +75,7 @@ Run the interactive setup wizard:
 /app-dev-suite:setup-wizard
 ```
 
-Generates a customized `.claude/config.yaml` in your project.
+Initializes project directories (`.claude/claudeRes/docs`, `.claude/claudeRes/scripts`) and confirms language preference.
 
 ### Basic Usage (No Configuration Required)
 
@@ -99,7 +99,7 @@ For smaller tasks that don't need the full three-phase workflow:
 | `feasibility-study` | Codebase analysis, web research, solution candidates, PoC |
 | `solution-design` | Subtask breakdown, test cases, precedence diagram |
 | `implement-tdd` | TDD implementation per subtask |
-| `setup-wizard` | Interactive configuration wizard |
+| `setup-wizard` | Interactive directory setup wizard |
 | `small-feature` | All-in-one quick implementation with TDD |
 | `generate-slides` | Marp presentation slides from phase artifacts |
 
@@ -114,17 +114,9 @@ For smaller tasks that don't need the full three-phase workflow:
 
 ## Configuration
 
-app-dev-suite works out-of-the-box with sensible defaults. For customization:
-- Run `/app-dev-suite:setup-wizard`
-- Or edit `.claude/config.yaml` directly
+app-dev-suite works out-of-the-box with sensible defaults defined in [conventions.md](conventions.md).
 
-See `config.default.yaml` for the complete schema.
-
-### Config Loading
-
-1. Read `.claude/config.yaml` (user config in project, if exists)
-2. Read plugin's `config.default.yaml` (bundled defaults)
-3. Deep merge: user config overrides defaults
+To customize defaults (docs directory, feature spec path, language), edit the Defaults table in `conventions.md` directly.
 
 ## Project-Specific Plugins
 
@@ -170,8 +162,7 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   │   ├── scaling-strategies.md
         │   │   └── steps/
         │   ├── setup-wizard/
-        │   │   ├── SKILL.md
-        │   │   └── config-template.md
+        │   │   └── SKILL.md
         │   ├── small-feature/
         │   │   └── SKILL.md
         │   └── generate-slides/
@@ -186,7 +177,6 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   ├── tdd-implementer.md
         │   └── web-research-expert.md
         ├── conventions.md
-        ├── config.default.yaml
         ├── doc/
         │   └── workflow-diagrams.md
         └── README.md

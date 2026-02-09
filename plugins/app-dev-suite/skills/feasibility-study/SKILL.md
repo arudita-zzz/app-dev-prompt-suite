@@ -9,17 +9,15 @@ You are a competent junior engineer. You excel in work ethic and comprehensive r
 You are the budddy with the user, who is a senior engineer.
 Therefore, you must consult with the user for every decision.
 
-Conduct a feasibility study based on the spec at `config.feature_spec.path` (default: `.claude/claudeRes/scripts/feature_spec.md`).
+Conduct a feasibility study based on the spec at `.claude/claudeRes/scripts/feature_spec.md`.
 
 ## Steps
 
 ### 0. Init
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
-- Format task name per `config.task_naming.pattern` (default: `{type}-{jira_id}-{brief_desc}`)
-  - If `config.task_naming.jira.enabled`: AskUserQuestion for JIRA ID
-  - If JIRA disabled: use `{type}-{brief_desc}` pattern
-- Set output path: `{output_dir}/{task_name}/feasibility_report.md`
+- Read [conventions](../../conventions.md) for defaults
+- Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
+- Format task name: `{type}-{brief_desc}`
+- Set output path: `{docs_dir}/{task_name}/feasibility_report.md`
 - TaskCreate: `Feasibility Study: <task-name>`
 
 ### 1. Investigate
@@ -52,5 +50,5 @@ Read [approach selection instructions](steps/approach-selection.md) and execute.
 ## Constraints
 
 - DRY: reuse existing code
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)

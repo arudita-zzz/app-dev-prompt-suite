@@ -14,10 +14,10 @@ Create a detailed solution design for TDD implementation based on the feasibilit
 ## Steps
 
 ### 0. Init
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
+- Read [conventions](../../conventions.md) for defaults
+- Check for `progress.yaml` in docs_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
 - Parse `-s|--source <path>` from arguments
-- If not specified: Glob for `**/*feasibility_report*.md` in output_dir, sort by mtime, present candidates to user
+- If not specified: Glob for `**/*feasibility_report*.md` in docs_dir, sort by mtime, present candidates to user
 - TaskList: find `Feasibility Study: <task-name>`, mark completed
 - TaskCreate: `Solution Design: <task-name>`
 
@@ -59,5 +59,5 @@ AskUserQuestion: approve / modify
 
 ## Constraints
 
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)

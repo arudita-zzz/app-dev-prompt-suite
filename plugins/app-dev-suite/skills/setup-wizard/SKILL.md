@@ -1,35 +1,28 @@
 ---
 name: setup-wizard
-description: Interactive configuration wizard to set up app-dev-suite
+description: Interactive setup wizard to initialize app-dev-suite directories
 argument-hint: none
 allowed-tools: Read, Write, Glob, Bash(mkdir)
 ---
 
-Interactive wizard to generate `config.yaml` with sensible defaults.
-Convention over Configuration — only asks what truly varies per project.
+Initialize project directories and confirm language preference.
 
 ## Steps
 
-### 0. Welcome
-Display welcome message. If `.claude/config.yaml` exists, AskUserQuestion: Backup and overwrite / Cancel.
+### 1. Create Directories
+- Create `.claude/claudeRes/docs` and `.claude/claudeRes/scripts` if not exist
 
-### 1. Document Language
+### 2. Language Preference
 AskUserQuestion: Auto-detect (Recommended) / English / Japanese / Type Anything
-Default "auto" detects from feature spec or user's language.
+- If not "auto": inform user to update the `language` row in [conventions.md](../../conventions.md)
 
-### 2. JIRA Integration
-AskUserQuestion: Enabled / Disabled
-If Enabled → AskUserQuestion: Require JIRA ID? Yes / No
-
-### 3. Generate config.yaml
-1. Read `config-template.md` and substitute answers from Steps 1-2.
-2. Create `.claude/claudeRes/` directory if not exists.
-3. Write to `.claude/config.yaml`.
-4. Display summary of key settings.
-5. Note: "For detailed customization, edit config.yaml directly. See comments in config.default.yaml for all options."
+### 3. Feature Spec Check
+- Check if `.claude/claudeRes/scripts/feature_spec.md` exists
+- If missing: inform user to place feature spec there before running skills
 
 ### 4. Completion
-Display completion message with quick-start guide:
+Display quick-start guide:
 - `feasibility-study` — Analyze feasibility of your feature
 - `solution-design` — Design solution and break down into subtasks
-- `implementation` — Implement subtasks with TDD
+- `implement-tdd` — Implement subtasks with TDD
+- `small-feature` — Quick all-in-one implementation

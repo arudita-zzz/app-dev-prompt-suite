@@ -14,5 +14,5 @@
 
 3. Create a Mermaid precedence diagram showing dependency flow
 
-4. If subtask count exceeds `config.templates.scaling.subtask_grouping_threshold`:
+4. If subtask count exceeds 20:
    apply scaling strategies from [scaling-strategies.md](../../implement-tdd/scaling-strategies.md)

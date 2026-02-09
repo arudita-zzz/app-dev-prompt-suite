@@ -5,7 +5,7 @@ argument-hint: [message]
 allowed-tools: Read, Grep, Write, Edit
 ---
 
-Implement the feature spec at `config.feature_spec.path` (default: `.claude/claudeRes/scripts/feature_spec.md`) using TDD.
+Implement the feature spec at `.claude/claudeRes/scripts/feature_spec.md` using TDD.
 
 ## Steps
 
@@ -27,7 +27,7 @@ Implement the feature spec at `config.feature_spec.path` (default: `.claude/clau
 
 ### 4. Design Subtasks & Approve
 - Split into subtasks; map dependencies (precedence diagram style)
-- Save to `{docs_dir}/{task_name}/solution_design.md` (default docs_dir: `.claude/claudeRes/docs`)
+- Save to `.claude/claudeRes/docs/{task_name}/solution_design.md`
 - AskUserQuestion: approve / request changes
 - Incorporate feedback
 
@@ -39,7 +39,7 @@ Implement the feature spec at `config.feature_spec.path` (default: `.claude/clau
 Delegate to tdd-implementer agent; implement subtasks in dependency order via TDD.
 
 ### 7. Report
-- Save implementation report to `{docs_dir}/{task_name}/dev_final.md`
+- Save implementation report to `.claude/claudeRes/docs/{task_name}/dev_final.md`
 - Append PR Description: Background / Main Changes / Notes (3-10 lines each)
 
 ## Constraints
@@ -47,4 +47,4 @@ Delegate to tdd-implementer agent; implement subtasks in dependency order via TD
 - DRY: reuse existing code
 - If TDD is overkill: inform user, get approval, then use simpler approach
 - For complex unknowns: delegate to poc-feasibility-expert agent
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Document language: see [conventions](../../conventions.md)

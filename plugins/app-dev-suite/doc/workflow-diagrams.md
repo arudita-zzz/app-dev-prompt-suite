@@ -41,7 +41,7 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Start(["/feasibility-study"]) --> Init["0. Config読込\nタスク名決定\n出力パス設定"]
+    Start(["/feasibility-study"]) --> Init["0. conventions.md読込\nタスク名決定\n出力パス設定"]
 
     Init --> Investigate
     subgraph Investigate["1. 並列調査"]
@@ -73,7 +73,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start(["/solution-design"]) --> Init["0. Config読込\nFeasibility Report取得\nタスク作成"]
+    Start(["/solution-design"]) --> Init["0. conventions.md読込\nFeasibility Report取得\nタスク作成"]
 
     Init --> Analyze["1. Report読込\n要件整理 + 実装項目\n+ 高レベルテストケース"]
     Analyze --> Approve1{"2. Initial Design\n承認 (AskUser)"}
@@ -107,7 +107,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start(["/implement-tdd"]) --> Init["0. Config読込\nSolution Design取得\nサブタスク・依存関係把握"]
+    Start(["/implement-tdd"]) --> Init["0. conventions.md読込\nSolution Design取得\nサブタスク・依存関係把握"]
     Init --> Branch["1. ブランチ作成\n+ チェックアウト"]
 
     Branch --> LoopStart{"2. 次の\nサブタスク?"}
@@ -154,14 +154,13 @@ flowchart LR
         DS["document-summarizer\n要約生成"]
     end
 
-    subgraph Config["Configuration"]
-        CD["config.default.yaml"]
-        CU["config.yaml (user)"]
+    subgraph Conventions["Conventions"]
+        CV["conventions.md\nDefaults テーブル"]
     end
 
     Skills --> Agents
-    Config -.->|"Step 0で読込"| Skills
+    Conventions -.->|"Step 0で読込"| Skills
 
     style Agents fill:#e0f2f1,stroke:#009688
-    style Config fill:#fafafa,stroke:#9E9E9E
+    style Conventions fill:#fafafa,stroke:#9E9E9E
 ```
