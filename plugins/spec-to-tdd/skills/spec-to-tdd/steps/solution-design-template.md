@@ -1,4 +1,4 @@
-> Structural reference.
+> Structural reference. Adapt headings and content to the output language.
 
 ````markdown
 # Solution Design: {task-name}

@@ -25,6 +25,7 @@ Read [TDD implementation instructions](steps/phase4-tdd-implementation.md) and e
 
 ## Rules
 
+- Detect the output language from the feature spec. If undetectable, use the language of user messages. Apply this language to all documents and terminal output.
 - Use `poc-feasibility-expert` for uncertain problems with no clear solution.
 - Never create/update/delete codebase files directly. Delegate to subagents.
 
