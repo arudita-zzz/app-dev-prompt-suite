@@ -2,10 +2,10 @@
 name: solution-design
 description: Create a clear and rational solution design for TDD implementation based on the findings written in the feasibility report.
 argument-hint: [-s|--source <feasibility-report-file-path>]
-allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*)
+allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*), Bash
 ---
 
-You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge. 
+You are a competent junior engineer. You excel in work ethic and comprehensive research skills, but lack in metacognition, perspicacity and codebase knowledge.
 You are the budddy with the user, who is a senior engineer.
 Therefore, you must consult with the user for every decision.
 
@@ -13,74 +13,50 @@ Create a detailed solution design for TDD implementation based on the feasibilit
 
 ## Steps
 
-### 0. Initialization
-- Load config: see [conventions](../../conventions.md)
-- Check for `progress.yaml` in output_dir; if found: AskUserQuestion — resume / start fresh / Type Anything
-- Load or create metrics tracker
+### 0. Init
 
-### 1. Source Report
+- Read [conventions](../../conventions.md) for defaults
 - Parse `-s|--source <path>` from arguments
-- If not specified: Glob for `**/*feasibility_report*.md` in output_dir, sort by mtime, present candidates to user
-
-### 2. Previous Task Check
+- If not specified: Glob for `**/*feasibility_report*.md` in docs_dir, sort by mtime, present candidates to user
 - TaskList: find `Feasibility Study: <task-name>`, mark completed
-- If incomplete: AskUserQuestion — continue or abort
+- TaskCreate: `Solution Design: <task-name>`
 
-### 3. New Task
-TaskCreate: `Solution Design: <task-name>`
+### 1. Analyze
 
-### 4. Read Feasibility Report
-- Read summary report; load details from `feasibility_details/` as needed
-
-### 5. Initial Design
+- Read feasibility report
 - Organize requirements
 - List major implementation items
 - Define high-level test cases (details deferred to implementation)
 - Outline subtask overview and dependencies
 
-### 6. Initial Design Approval
+### 2. Approve Initial Design
+
 AskUserQuestion: approve / modify
 
-### 7. Deep Codebase Investigation (parallel)
-Read [codebase investigation instructions](steps/codebase-investigation.md) and execute.
+### 3. Investigate & Break Down
 
-### 8. Subtask Breakdown
-Read [subtask breakdown instructions](steps/subtask-breakdown.md) and execute.
+- Read [codebase investigation instructions](steps/codebase-investigation.md) and execute (codebase-investigator agent)
+- Read [subtask breakdown instructions](steps/subtask-breakdown.md) and execute (subtask split + dependency map + Mermaid diagram)
 
-### 9. Solution Design Document
-Save hierarchical docs:
-- `{docs_dir}/{task_name}/solution_design.md` — summary (max 100 lines), format per `design-format.md`
-- `{docs_dir}/{task_name}/solution_details/`:
-  - `test_cases.md` — high-level test cases
-  - `subtasks.md` — subtask details (see `details-format.md`)
-  - `file_changes/` — per-subtask file change details
+### 4. Save & Approve
 
-### 10. Summary Display
-Use document-summarizer agent to summarize and display to user.
+- Save `{docs_dir}/{task_name}/design/solution_design.md` — format per `design-format.md`
+- Use document-summarizer agent to summarize and display to user
+- AskUserQuestion: approve / request changes / request additional investigation
+  - Changes → update documents and re-display
+  - Additional investigation → run appropriate agents (Explore / web-research-expert / Read+Grep), update design, re-display
 
-### 11. Approval Loop
-Read [approval loop instructions](steps/approval-loop.md) and execute.
+### 5. Complete
 
-### 12. Quality Gate
-- Launch quality-gate-evaluator agent with: phase=solution_design, docs_dir, task_name, thresholds from config
-- Agent independently reads artifacts, collects evidence, evaluates against thresholds
-- Agent returns: structured quality report with recommendation
-- Present report to user
-- AskUserQuestion — gate decision: Pass / Warn / Block / Type Anything
-- Block → fix issues; Warn → record concerns, proceed
-
-### 13. Metrics & Completion
-- Save metrics report; display summary
-- Update `progress.yaml`: set solution_design to completed, record output path
 - TaskUpdate: mark completed
 - TaskCreate: `TDD Implementation: <task-name>`
 - Display next phase command:
   ```
-  Next: /app-dev-suite:implement-tdd -s {path-to-solution-design}
+  Next: /app-dev-suite:implement-tdd -s {path-to-design/solution_design.md}
   ```
 - AskUserQuestion: proceed to next phase? (Yes: copy and run the command above / No: run later / Type Anything)
 
 ## Constraints
 
-- Docs dir: `config.documents.output_dir` (default: `.claude/claudeRes/docs`)
-- Document language: `config.documents.language` (see [conventions](../../conventions.md))
+- Docs dir: `.claude/claudeRes/docs`
+- Document language: see [conventions](../../conventions.md)

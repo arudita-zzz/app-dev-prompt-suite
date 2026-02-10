@@ -25,29 +25,28 @@ After installation, skills are accessible with the `app-dev-suite:` namespace pr
 /app-dev-suite:feasibility-study
 /app-dev-suite:solution-design
 /app-dev-suite:implement-tdd
-/app-dev-suite:setup-wizard
 /app-dev-suite:small-feature
 /app-dev-suite:generate-slides
 ```
 
 ## Overview
 
-app-dev-suite is a structured development workflow plugin for teams that need **process transparency**, **decision traceability**, and **quality gates** — capabilities that Claude Code's built-in Plan Mode does not provide.
+app-dev-suite is a structured development workflow plugin for teams that need **process transparency** and **decision traceability** — capabilities that Claude Code's built-in Plan Mode does not provide.
 
 ### Three-Phase Workflow
 
 1. **Feasibility Study** — Codebase analysis, web research, solution candidates, and optional PoC
 2. **Solution Design** — Subtask breakdown, dependency mapping, test case planning
-3. **TDD Implementation** — Test-driven development with per-subtask quality checks
+3. **TDD Implementation** — Test-driven development with per-subtask verification
 
-Each phase produces structured documents (summary + hierarchical details) that serve as audit trails and team-shareable artifacts.
+Each phase produces a structured document that serves as an audit trail and team-shareable artifact.
 
 ### Design Philosophy
 
 app-dev-suite is built for **spec-driven implementation on enterprise-scale codebases** — where process transparency, correctability at key decision points, and output consistency matter.
 
 - **Process transparency**: Every phase produces structured, reviewable artifacts with decision rationale
-- **Correctability**: User-driven quality gates at phase boundaries let teams course-correct before work compounds
+- **Correctability**: User approval at key decision points lets teams course-correct before work compounds
 - **Output consistency**: Templates ensure uniform document structure regardless of session or model variance
 - **Sonnet-optimized**: Workflow and prompts are designed to produce reliable results with Claude Sonnet, keeping Opus optional for deep analysis
 
@@ -55,27 +54,18 @@ app-dev-suite is built for **spec-driven implementation on enterprise-scale code
 
 | | Plan Mode | app-dev-suite |
 |---|---|---|
-| **Workflow** | User designs ad-hoc each time | Pre-built 3-phase + quality gates |
+| **Workflow** | User designs ad-hoc each time | Pre-built 3-phase with user approval gates |
 | **Artifact persistence** | Confined to conversation | File output per phase, resumable across sessions |
-| **Decision records** | Not retained unless explicitly instructed | Built into workflow via alternatives.md |
-| **Quality checks** | None | Evidence-based quality gates at phase boundaries |
+| **Decision records** | Not retained unless explicitly instructed | Built into workflow via feasibility report |
+| **Correctability** | None | User approval at every key decision point |
 | **Output consistency** | Varies per run | Unified structure via templates, multi-language support |
 | **Specialized agents** | General-purpose subagents only | 4 dedicated agents: TDD / PoC / research / summarization |
 
-**Best fit**: Teams working on large codebases where development decisions need to be reviewed by stakeholders — why this design was chosen, what alternatives were considered, and what quality criteria were met.
+**Best fit**: Teams working on large codebases where development decisions need to be reviewed by stakeholders — why this design was chosen and what alternatives were considered.
 
 For quick individual tasks, Plan Mode or `/app-dev-suite:small-feature` remains the simpler choice.
 
 ## Quick Start
-
-### First-Time Setup
-
-Run the interactive setup wizard:
-```
-/app-dev-suite:setup-wizard
-```
-
-Generates a customized `.claude/config.yaml` in your project.
 
 ### Basic Usage (No Configuration Required)
 
@@ -98,11 +88,9 @@ For smaller tasks that don't need the full three-phase workflow:
 |-------|-------------|
 | `feasibility-study` | Codebase analysis, web research, solution candidates, PoC |
 | `solution-design` | Subtask breakdown, test cases, precedence diagram |
-| `implement-tdd` | TDD implementation per subtask with quality gates |
-| `setup-wizard` | Interactive configuration wizard |
+| `implement-tdd` | TDD implementation per subtask |
 | `small-feature` | All-in-one quick implementation with TDD |
 | `generate-slides` | Marp presentation slides from phase artifacts |
-| `quality-gate` | (Background) Checklists, metrics, gate decisions |
 
 ## Agents
 
@@ -115,17 +103,9 @@ For smaller tasks that don't need the full three-phase workflow:
 
 ## Configuration
 
-app-dev-suite works out-of-the-box with sensible defaults. For customization:
-- Run `/app-dev-suite:setup-wizard`
-- Or edit `.claude/config.yaml` directly
+app-dev-suite works out-of-the-box with sensible defaults defined in [conventions.md](conventions.md).
 
-See `config.default.yaml` for the complete schema.
-
-### Config Loading
-
-1. Read `.claude/config.yaml` (user config in project, if exists)
-2. Read plugin's `config.default.yaml` (bundled defaults)
-3. Deep merge: user config overrides defaults
+To customize defaults (docs directory, feature spec path, language), edit the Defaults table in `conventions.md` directly.
 
 ## Project-Specific Plugins
 
@@ -158,24 +138,15 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   ├── feasibility-study/
         │   │   ├── SKILL.md
         │   │   ├── report-format.md
-        │   │   ├── details-format.md
         │   │   └── steps/
         │   ├── solution-design/
         │   │   ├── SKILL.md
         │   │   ├── design-format.md
-        │   │   ├── details-format.md
-        │   │   ├── subtask-design-template.md
         │   │   └── steps/
         │   ├── implement-tdd/
         │   │   ├── SKILL.md
         │   │   ├── scaling-strategies.md
         │   │   └── steps/
-        │   ├── quality-gate/
-        │   │   ├── SKILL.md
-        │   │   └── quality-checklist-template.md
-        │   ├── setup-wizard/
-        │   │   ├── SKILL.md
-        │   │   └── config-template.md
         │   ├── small-feature/
         │   │   └── SKILL.md
         │   └── generate-slides/
@@ -190,7 +161,6 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   ├── tdd-implementer.md
         │   └── web-research-expert.md
         ├── conventions.md
-        ├── config.default.yaml
         ├── doc/
         │   └── workflow-diagrams.md
         └── README.md
@@ -201,15 +171,15 @@ app-dev-prompt-suite/                    # Marketplace repository
 ```
 # Phase 1: Feasibility Study
 /app-dev-suite:feasibility-study
-# → Produces: {docs_dir}/{task_name}/feasibility_report.md
+# → Produces: {docs_dir}/{task_name}/feasibility/feasibility_report.md
 
 # Phase 2: Solution Design
 /app-dev-suite:solution-design
-# → Produces: {docs_dir}/{task_name}/solution_design.md
+# → Produces: {docs_dir}/{task_name}/design/solution_design.md
 
 # Phase 3: Implementation
 /app-dev-suite:implement-tdd
-# → Produces: {docs_dir}/{task_name}/implementation_report.md
+# → Produces: {docs_dir}/{task_name}/implementation/implementation_report.md
 
 # Generate presentation slides from artifacts
 /app-dev-suite:generate-slides

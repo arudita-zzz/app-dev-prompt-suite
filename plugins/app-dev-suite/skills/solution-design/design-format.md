@@ -1,65 +1,32 @@
-> Structural reference. Adapt headings to `config.documents.language`.
+> Structural reference. Adapt headings to the document language (see conventions.md).
 
-````markdown
-# Solution Design Format (max 100 lines)
-
-# Solution Design: {task-name}
-
-**Based on:** `{path-to-feasibility-report}`
-**Created:** {date}
-**Next step:** `/app-dev-suite:implement-tdd -s <this-file>`
+# Solution Design
 
 ## Requirements
+{Organized from feasibility report. Numbered. Group by functional area if appropriate.}
 
-{requirements summary — max 20 lines}
+## Design Decisions
+{Key architectural and technical decisions informed by codebase investigation. Each: decision, rationale, alternatives rejected.}
 
-## Implementation Items (Initial Design)
-
-- Data layer: {changes}
-- Domain layer: {changes}
-- UI layer: {changes}
-
-## Risks / Concerns
-
-- {performance impact}
-- {compatibility with existing features}
+## Implementation Items
+{Major changes by layer (data / domain / UI). Per item: what changes and why.}
 
 ## Subtask List
 
-1. {subtask name: summary} - Est: 1-2h
-2. {subtask name: summary} - Est: 2-3h
-...
+Per subtask:
+
+### S{N}: {name}
+- **Summary**: {what this subtask accomplishes}
+- **Effort**: {S/M/L}
+- **Dependencies**: blocks {list} / blocked-by {list}
+- **Scope**: {files to create or modify}
+- **Acceptance Criteria**: {verifiable conditions for completion}
 
 ## Precedence Diagram
-
-```mermaid
-graph LR
-  1[Subtask 1] --> 2[Subtask 2]
-  1 --> 3[Subtask 3]
-  2 --> 4[Subtask 4]
-  3 --> 4
-```
-
-**Dependency Depth:** {N}
+{Mermaid flowchart showing subtask dependency flow. Node labels: S{N} short name.}
 
 ## High-Level Test Cases
+{Test cases with target behavior and related subtask number(s). Table: ID | Description | Type (unit/integration) | Subtask.}
 
-1. When user does X, Y is displayed
-2. Invalid input shows error message
-
-## Details
-
-- [Test Cases](./solution_details/test_cases.md)
-- [Subtask Details](./solution_details/subtasks.md)
-- [File Changes](./solution_details/file_changes/)
-
-## Quality Metrics
-
-{metrics summary}
-
-## Next Actions
-
-1. Review this solution design
-2. Run the following command to proceed:
-   `/app-dev-suite:implement-tdd -s {actual-output-path}`
-````
+## Risks / Concerns
+{Identified risks with mitigation approach. Include feasibility-report constraints that affect design.}

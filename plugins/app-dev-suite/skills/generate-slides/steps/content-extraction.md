@@ -14,7 +14,7 @@ For each selected phase:
 For each slide defined in slide-format.md:
 - Locate the source file and target section
 - Extract content within that section
-- If content exceeds `config.slides.content_max_lines_per_slide`: delegate to `document-summarizer` agent with the max line count as the limit
+- If content exceeds 12 lines: delegate to `document-summarizer` agent with 12 as the max line count
 
 ## Special Content Handling
 
@@ -25,13 +25,12 @@ Preserve verbatim. Never summarize or modify Mermaid blocks.
 Preserve table structure. If table exceeds 8 rows: keep header + top 6 data rows + "... ({N} more rows)" footer row.
 
 ### Bullet Lists
-If list exceeds `config.slides.content_max_lines_per_slide`: delegate to `document-summarizer` agent to condense.
+If list exceeds 12 lines: delegate to `document-summarizer` agent to condense.
 
 ## Phase-to-Artifact Mapping
 
-| Phase | Summary | Details Directory |
-|-------|---------|-------------------|
-| feasibility | `feasibility_report.md` | `feasibility_details/` |
-| design | `solution_design.md` | `solution_details/` |
-| implementation | `implementation_report.md` | (inline) |
-| quality | `quality_metrics.md` | — |
+| Phase | Document |
+|-------|----------|
+| feasibility | `feasibility/feasibility_report.md` |
+| design | `design/solution_design.md` |
+| implementation | `implementation/implementation_report.md` |

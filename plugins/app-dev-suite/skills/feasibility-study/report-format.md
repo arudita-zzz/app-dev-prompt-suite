@@ -1,45 +1,37 @@
-> Structural reference. Adapt headings to `config.documents.language`.
+> Structural reference. Adapt headings to the document language (see conventions.md).
 
-# Feasibility Report Format (max 100 lines)
-
-```markdown
-# Feasibility Report: {task-name}
-
-**Created:** {date}
-**Next step:** `/app-dev-suite:solution-design -s <this-file>`
+# Feasibility Report
 
 ## Requirements
+{Clarified requirements from spec and user Q&A. Numbered list. Each item: what is required and why.}
 
-{requirements summary — max 20 lines}
+## Codebase Investigation
+{Detailed findings from codebase analysis, organized by concern area:
+- If any concrete investigation target was specified in the spec, you must clarify the answer/result for it.
+- Relevant existing implementations and reusable components (cite file paths)
+- Interfaces, contracts, and patterns to conform to
+- Impact scope: modules/files affected by the change
+- Test landscape: existing test coverage and patterns
+- Gaps: missing capabilities or areas needing new implementation}
 
-## Implementation Candidates
+## External Research
+{Findings from web research, organized by topic:
+- Best practices and recommended patterns (with source URLs)
+- Library/API documentation and version constraints
+- Known solutions and reference implementations
+- Retrieval dates for time-sensitive information}
 
-- Candidate 1: {summary}
-- Candidate 2: {summary}
-- Candidate 3: {summary}
+## Approach Candidates
+{Each candidate as a subsection:
+### Candidate {N}: {name}
+- Summary: {concise description}
+- Pros: {advantages}
+- Cons: {disadvantages and risks}
+}
 
-## Chosen Approach
+## Selected Approach
+{Chosen approach with selection rationale. Reference candidate name.
+If PoC was conducted: hypothesis tested, method, key results, and evidence that influenced the decision.}
 
-{final approach — max 20 lines}
-
-## Rationale
-
-{investigation results and selection reasoning — max 30 lines}
-
-## Details
-
-- [Codebase Analysis](./feasibility_details/codebase_analysis.md)
-- [Alternatives Comparison](./feasibility_details/alternatives.md)
-- [PoC Results](./poc/) *(if conducted)*
-- [References](./references/) *(if web research conducted)*
-
-## Quality Metrics
-
-{metrics summary}
-
-## Next Actions
-
-1. Review this feasibility report
-2. Run the following command to proceed:
-   `/app-dev-suite:solution-design -s {actual-output-path}`
-```
+## Assumptions & Constraints
+{Technical constraints, environmental dependencies, scope boundaries, risks identified during investigation. Numbered list.}

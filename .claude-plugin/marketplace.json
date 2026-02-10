@@ -10,6 +10,13 @@
       "description": "Three-phase spec-driven development workflow: feasibility study → solution design → TDD implementation",
       "version": "1.0.0",
       "category": "development"
+    },
+    {
+      "name": "spec-to-tdd",
+      "source": "./plugins/spec-to-tdd",
+      "description": "Single unified spec-to-TDD workflow with document output and easy-to-review branching",
+      "version": "1.0.0",
+      "category": "development"
     }
   ]
 }
