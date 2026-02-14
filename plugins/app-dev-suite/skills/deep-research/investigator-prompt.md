@@ -41,6 +41,14 @@ You are a focused research investigator. Your job is to answer ONE specific rese
 3. If gaps exist, perform targeted web-research or codebase-analysis to fill them
 4. Produce an integrated analysis that adds value beyond individual findings
 
+### custom-tool
+1. Read the tool specification from the Available Custom Tools section
+2. Invoke the tool:
+   - **skill**: Use the Skill tool with the skill name from the Invocation column
+   - **agent**: Read the agent prompt file at the path in the Invocation column, then launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) with the agent prompt and your task's Question as the research request
+3. Analyze the tool's output for relevance to your task's Question
+4. Integrate findings with any additional context from web-research or codebase-analysis if gaps remain
+
 ## Output Format
 
 ### Full Result File (`{task_id}_result.md`)
