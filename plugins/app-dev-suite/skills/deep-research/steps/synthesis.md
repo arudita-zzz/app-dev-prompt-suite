@@ -16,10 +16,18 @@ For each research dimension:
 - Flag contradictions (conflicting findings across tasks)
 - Identify gaps (dimensions with insufficient coverage)
 
-### 3. Fill Coverage Gaps
+### 3. Completeness Assessment
+For each research dimension, rate coverage:
+- **Sufficient**: Multiple corroborating sources, high-confidence findings
+- **Partial**: Some findings but gaps in depth or breadth
+- **Insufficient**: No meaningful findings
+
+Only dimensions rated Partial or Insufficient proceed to Step 4.
+
+### 4. Fill Coverage Gaps
 If critical gaps exist:
 - Create ad-hoc task definitions for gap-filling
-- For each gap task, launch a Task tool subagent (`subagent_type: general-purpose`) with the same investigator-prompt.md pattern:
+- For each gap task, launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) with the same investigator-prompt.md pattern:
   ```
   {investigator-prompt.md contents}
 
@@ -38,12 +46,12 @@ If critical gaps exist:
   ```
 - Append new key findings to accumulated_findings.md
 
-### 4. Synthesize
+### 5. Synthesize
 For deeper analysis, Read individual `{task_id}_result.md` files (the `## Detailed Findings` section) as needed. Then:
 - Identify cross-cutting patterns
 - Draw connections between dimensions
 - Formulate actionable recommendations
 - Assess overall confidence
 
-### 5. Generate Report
+### 6. Generate Report
 Write `research_report.md` following [report format](../report-format.md).

@@ -14,7 +14,7 @@ If `tasks/{task_id}_result.md` already exists, skip to the next task.
 
 ### 2. Investigate
 
-Launch a Task tool subagent (`subagent_type: general-purpose`) with the following prompt assembled by reading each file:
+Launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) with the following prompt assembled by reading each file:
 
 ```
 {investigator-prompt.md contents}
@@ -44,7 +44,7 @@ After the subagent completes:
 
 Count remaining incomplete tasks (no `_result.md` file). If none remain, exit the loop.
 
-Otherwise, launch a Task tool subagent (`subagent_type: general-purpose`) with:
+Otherwise, launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) with:
 
 ```
 {adaptation-prompt.md contents}

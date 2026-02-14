@@ -10,7 +10,12 @@ Break down the research topic into focused investigation tasks.
 - Number each dimension: D1, D2, ...
 
 ### 2. Design Investigation Tasks
-Create 3-8 tasks that collectively cover all dimensions. For each task:
+Create tasks that collectively cover all dimensions. Scale task count to topic complexity:
+- Narrow, well-defined topic: 3-4 tasks
+- Multi-faceted topic with clear dimensions: 5-6 tasks
+- Broad, cross-disciplinary topic: 7-8 tasks
+
+For each task:
 
 ```markdown
 # {task_id}: {title}
@@ -23,6 +28,11 @@ Create 3-8 tasks that collectively cover all dimensions. For each task:
 
 ## Guidance
 {Specific instructions, search terms, or focus areas}
+
+## Scope
+- **In scope**: {what this task covers}
+- **Out of scope**: {what this task explicitly excludes}
+- **Expected depth**: {surface overview | detailed analysis}
 ```
 
 Task design principles:
