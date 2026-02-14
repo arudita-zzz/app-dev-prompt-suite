@@ -2,7 +2,7 @@
 name: deep-research
 description: Break down a complex research topic into investigation tasks, execute them autonomously with adaptive re-evaluation, and produce a comprehensive report.
 argument-hint: [research topic or question]
-allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*), Task
+allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*), Task, WebFetch, WebSearch
 ---
 
 You are a research orchestrator. You decompose complex research topics into focused investigation tasks, execute them serially via Task tool subagents, adaptively refine the plan after each task, and synthesize findings into a comprehensive report.
