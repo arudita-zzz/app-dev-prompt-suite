@@ -4,6 +4,13 @@
 
 ```mermaid
 flowchart LR
+    subgraph Phase0["Optional: /deep-research"]
+        R1[トピック分析\nタスク分解]
+        R2[直列調査\n+ 適応的再評価]
+        R3[合成レポート]
+        R1 --> R2 --> R3
+    end
+
     subgraph Phase1["Phase 1: /feasibility-study"]
         F1[Spec読込]
         F2[コードベース調査\n+ Web調査]
@@ -25,9 +32,11 @@ flowchart LR
         I1 --> I2 --> I3
     end
 
+    Phase0 -. "research_report.md\n(-r flag)" .-> Phase1
     Phase1 -- "feasibility/feasibility_report.md" --> Phase2
     Phase2 -- "design/solution_design.md" --> Phase3
 
+    style Phase0 fill:#f3e5f5,stroke:#9C27B0
     style Phase1 fill:#e8f4fd,stroke:#2196F3
     style Phase2 fill:#fff3e0,stroke:#FF9800
     style Phase3 fill:#e8f5e9,stroke:#4CAF50
@@ -36,6 +45,42 @@ flowchart LR
 ---
 
 ## 2. Detailed Flow
+
+### Deep Research (Optional)
+
+```mermaid
+flowchart TD
+    Start(["/deep-research"]) --> Init["0. conventions.md読込\nリサーチトピック取得\n出力パス設定"]
+
+    Init --> Decompose["1. タスク分解\nディメンション抽出\n3-8タスク設計"]
+    Decompose --> Approve{"タスク承認\n(AskUser)"}
+    Approve -- "修正" --> Decompose
+    Approve -- "承認" --> Loop
+
+    subgraph Loop["2. 調査ループ (自律・ヘッドレス)"]
+        direction TD
+        Investigate["claude -p: 調査実行\n(WebSearch/Grep/Read)"]
+        Investigate --> Accumulate["キーファインディングス蓄積\naccumulated_findings.md"]
+        Accumulate --> Adapt["claude -p: 適応評価\n残タスク再評価・修正"]
+        Adapt --> NextTask{"次のタスク?"}
+        NextTask -- "あり" --> Investigate
+    end
+
+    NextTask -- "全完了" --> Synthesize["3. 合成\nクロスリファレンス\nギャップ補完"]
+    Synthesize --> Report["4. レポート生成\nresearch_report.md"]
+    Report --> ReviewReport{"レポート承認\n(AskUser)"}
+    ReviewReport -- "修正要求" --> Synthesize
+    ReviewReport -- "承認" --> Complete["5. 完了"]
+    Complete --> Branch{"feasibility-study\nに分岐?"}
+    Branch -- "Yes" --> FS(["/feasibility-study -r report"])
+    Branch -- "No" --> End([終了])
+
+    style Start fill:#9C27B0,color:#fff
+    style Loop fill:#f3e5f5
+    style Approve fill:#fff9c4
+    style ReviewReport fill:#fff9c4
+    style Branch fill:#fff9c4
+```
 
 ### Phase 1: Feasibility Study
 
@@ -137,6 +182,7 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph Skills["User-Invocable Skills"]
+        DR["/deep-research"]
         FS["/feasibility-study"]
         SD["/solution-design"]
         IT["/implement-tdd"]

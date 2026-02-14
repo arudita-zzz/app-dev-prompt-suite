@@ -16,21 +16,25 @@ A Claude Code plugin marketplace for spec-driven development workflows.
 
 | Plugin | Description |
 |--------|-------------|
-| [app-dev-suite](plugins/app-dev-suite/) | Three-phase spec-driven development workflow: feasibility study, solution design, and TDD implementation |
+| [app-dev-suite](plugins/app-dev-suite/) | Spec-driven development workflow with deep research, feasibility study, solution design, and TDD implementation |
 
 ## Workflow Overview
 
 ```mermaid
 flowchart LR
-    F["/feasibility-study"] -- "feasibility_report.md" --> S["/solution-design"]
+    D["/deep-research"] -. "research_report.md\n(-r flag)" .-> F["/feasibility-study"]
+    F -- "feasibility_report.md" --> S["/solution-design"]
     S -- "solution_design.md" --> I["/implement-tdd"]
     I -- "implementation_report.md" --> G["/generate-slides"]
 
+    style D fill:#f3e5f5,stroke:#9C27B0
     style F fill:#e8f4fd,stroke:#2196F3
     style S fill:#fff3e0,stroke:#FF9800
     style I fill:#e8f5e9,stroke:#4CAF50
-    style G fill:#f3e5f5,stroke:#9C27B0
+    style G fill:#fce4ec,stroke:#E91E63
 ```
+
+**Deep Research** (optional): Autonomous multi-task investigation with adaptive re-evaluation
 
 **Phase 1 — Feasibility Study**: Codebase analysis, web research, solution candidates, optional PoC
 
@@ -50,7 +54,7 @@ app-dev-prompt-suite/
 │   └── marketplace.json
 ├── plugins/
 │   └── app-dev-suite/
-│       ├── skills/           # 7 skills (6 user-invocable + 1 background)
+│       ├── skills/           # 6 user-invocable skills
 │       ├── agents/           # 4 specialized subagents
 │       ├── script/           # Shell scripts for tooling
 │       ├── config.default.yaml

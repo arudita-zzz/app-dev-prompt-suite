@@ -1,7 +1,7 @@
 ---
 name: feasibility-study
 description: Read a spec document and conduct a deep feasibility study with deep codebase analysis, web research, and PoC prototyping.
-argument-hint: [message]
+argument-hint: [-r|--research <path>] [message]
 allowed-tools: Read, Grep, Glob, Write(.claude/claudeRes/*), Bash
 ---
 
@@ -16,8 +16,9 @@ Conduct a feasibility study based on the spec at `.claude/claudeRes/scripts/feat
 ### 0. Init
 
 - Read [conventions](../../conventions.md) for defaults
+- Parse arguments: if `-r` or `--research` flag is provided, store the path as `research_report_path`
 - AskUserQuestion for task_name
-- Set output path: `{docs_dir}/{task_name}/feasibility
+- Set output path: `{docs_dir}/{task_name}/feasibility`
 - TaskCreate: `Feasibility Study: <task-name>`
 
 ### 1. Clarify the Requirements
@@ -26,7 +27,7 @@ Conduct a feasibility study based on the spec at `.claude/claudeRes/scripts/feat
 
 ### 2. Investigate
 
-Read [investigation instructions](steps/investigation.md) and execute (parallel: codebase-investigator + web-research-expert).
+Read [investigation instructions](steps/investigation.md) and execute. Behavior depends on whether `--research` was provided.
 
 ### 3. Clarify & Propose
 

@@ -1,6 +1,6 @@
 # app-dev-suite
 
-A Claude Code plugin providing a three-phase spec-driven development workflow: feasibility study, solution design, and TDD implementation.
+A Claude Code plugin providing deep research and a three-phase spec-driven development workflow: deep research, feasibility study, solution design, and TDD implementation.
 
 ## Installation
 
@@ -22,19 +22,21 @@ claude --plugin-dir ./app-dev-suite-plugin
 
 After installation, skills are accessible with the `app-dev-suite:` namespace prefix:
 ```
-/app-dev-suite:feasibility-study
-/app-dev-suite:solution-design
-/app-dev-suite:implement-tdd
-/app-dev-suite:small-feature
-/app-dev-suite:generate-slides
+/app-dev-suite:deep-research        # Optional: autonomous deep research
+/app-dev-suite:feasibility-study    # Phase 1
+/app-dev-suite:solution-design      # Phase 2
+/app-dev-suite:implement-tdd        # Phase 3
+/app-dev-suite:small-feature        # Quick all-in-one
+/app-dev-suite:generate-slides      # Slide generation
 ```
 
 ## Overview
 
 app-dev-suite is a structured development workflow plugin for teams that need **process transparency** and **decision traceability** — capabilities that Claude Code's built-in Plan Mode does not provide.
 
-### Three-Phase Workflow
+### Workflow
 
+0. **Deep Research** (optional) — Autonomous multi-task investigation with adaptive re-evaluation, feeds into feasibility study via `-r` flag
 1. **Feasibility Study** — Codebase analysis, web research, solution candidates, and optional PoC
 2. **Solution Design** — Subtask breakdown, dependency mapping, test case planning
 3. **TDD Implementation** — Test-driven development with per-subtask verification
@@ -59,7 +61,7 @@ app-dev-suite is built for **spec-driven implementation on enterprise-scale code
 | **Decision records** | Not retained unless explicitly instructed | Built into workflow via feasibility report |
 | **Correctability** | None | User approval at every key decision point |
 | **Output consistency** | Varies per run | Unified structure via templates, multi-language support |
-| **Specialized agents** | General-purpose subagents only | 4 dedicated agents: TDD / PoC / research / summarization |
+| **Specialized agents** | General-purpose subagents only | 4 dedicated agents + autonomous deep research via Task tool subagents |
 
 **Best fit**: Teams working on large codebases where development decisions need to be reviewed by stakeholders — why this design was chosen and what alternatives were considered.
 
@@ -70,9 +72,19 @@ For quick individual tasks, Plan Mode or `/app-dev-suite:small-feature` remains 
 ### Basic Usage (No Configuration Required)
 
 ```
+/app-dev-suite:deep-research        # Optional: deep research before feasibility
 /app-dev-suite:feasibility-study    # Phase 1
 /app-dev-suite:solution-design      # Phase 2
 /app-dev-suite:implement-tdd        # Phase 3
+```
+
+### With Deep Research
+
+```
+/app-dev-suite:deep-research "MCP server integration patterns"
+# → Produces research_report.md
+# Then feed into feasibility study:
+/app-dev-suite:feasibility-study -r {path-to-research_report.md}
 ```
 
 ### Quick Implementation
@@ -86,6 +98,7 @@ For smaller tasks that don't need the full three-phase workflow:
 
 | Skill | Description |
 |-------|-------------|
+| `deep-research` | Autonomous multi-task investigation with adaptive re-evaluation |
 | `feasibility-study` | Codebase analysis, web research, solution candidates, PoC |
 | `solution-design` | Subtask breakdown, test cases, precedence diagram |
 | `implement-tdd` | TDD implementation per subtask |
@@ -135,6 +148,13 @@ app-dev-prompt-suite/                    # Marketplace repository
         ├── .claude-plugin/
         │   └── plugin.json
         ├── skills/
+        │   ├── deep-research/
+        │   │   ├── SKILL.md
+        │   │   ├── investigator-prompt.md
+        │   │   ├── adaptation-prompt.md
+        │   │   ├── task-result-format.md
+        │   │   ├── report-format.md
+        │   │   └── steps/
         │   ├── feasibility-study/
         │   │   ├── SKILL.md
         │   │   ├── report-format.md
@@ -169,8 +189,13 @@ app-dev-prompt-suite/                    # Marketplace repository
 ## Example Workflow
 
 ```
-# Phase 1: Feasibility Study
+# Optional: Deep Research
+/app-dev-suite:deep-research "research topic"
+# → Produces: {docs_dir}/{research_name}/research/research_report.md
+
+# Phase 1: Feasibility Study (with or without prior research)
 /app-dev-suite:feasibility-study
+/app-dev-suite:feasibility-study -r {path-to-research_report.md}
 # → Produces: {docs_dir}/{task_name}/feasibility/feasibility_report.md
 
 # Phase 2: Solution Design
