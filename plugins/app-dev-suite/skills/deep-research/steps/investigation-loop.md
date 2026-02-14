@@ -19,6 +19,9 @@ Launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) 
 ```
 {investigator-prompt.md contents}
 
+## Available Custom Tools
+{Custom Investigation Tools table from conventions.md — include only if the table has entries, omit this section if empty}
+
 ## Research Context
 {research_context.md contents}
 

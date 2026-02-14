@@ -18,6 +18,17 @@ Generate all documents in the language specified above.
 
 Template files serve as structural references. Adapt headings and content to the document language.
 
+## Custom Investigation Tools
+
+Tools listed here are automatically available during investigation phases of all skills.
+Each tool is evaluated for relevance to the current research topic and used when judged appropriate.
+
+| Name | Type | Description | Invocation |
+|------|------|-------------|------------|
+
+- **Type**: `skill` — Claude Code plugin skill / `agent` — agent prompt file (.md)
+- **Invocation**: skill → skill name (e.g. `my-plugin:security-audit`) / agent → path to .md file relative to project root
+
 ## Issue Handling
 
 When discovering issues during any phase:

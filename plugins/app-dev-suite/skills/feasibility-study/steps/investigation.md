@@ -25,5 +25,12 @@ Launch 2 parallel Task agents:
    - Search for industry best practices, library documentation, and known solutions
    - Include version info and retrieval date in findings
 
+3. **Custom Tool Tasks** (if Custom Investigation Tools are defined in conventions.md):
+   For each custom tool whose Description is relevant to the research topic, launch an additional parallel Task agent:
+   - **skill** type: Use the Skill tool with the Invocation value, passing the research topic as context
+   - **agent** type: Read the agent prompt file at the Invocation path, then launch a Task tool subagent (`subagent_type: general-purpose`, `model: sonnet`) with the agent prompt and the research topic
+
+   Skip tools whose Description is clearly unrelated to the current research topic.
+
 Receive codebase investigation report.
-Merge codebase investigation report with web research results into comprehensive analysis.
+Merge codebase investigation report, web research results, and any custom tool results into comprehensive analysis.

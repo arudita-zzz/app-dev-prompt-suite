@@ -120,6 +120,26 @@ app-dev-suite works out-of-the-box with sensible defaults defined in [convention
 
 To customize defaults (docs directory, feature spec path, language), edit the Defaults table in `conventions.md` directly.
 
+### Custom Investigation Tools
+
+Register project-specific investigation tools (skills or agents) in the `## Custom Investigation Tools` table in `conventions.md`. Registered tools are automatically evaluated for relevance and invoked during investigation phases of deep-research, feasibility-study, and solution-design.
+
+**Example:**
+
+```markdown
+| Name | Type | Description | Invocation |
+|------|------|-------------|------------|
+| Security Audit | skill | Analyze code for OWASP vulnerabilities | my-plugin:security-audit |
+| Architecture Review | agent | Review against project architecture guidelines | .claude/agents/arch-review.md |
+```
+
+**Integration per skill:**
+- **deep-research**: Custom tools become an assignable investigation method (`custom-tool`) during task decomposition
+- **feasibility-study**: Relevant tools launch as additional parallel investigation agents
+- **solution-design**: Relevant tools launch as additional parallel investigation agents alongside codebase-investigator
+
+When the table is empty, all skills behave identically to the default (no custom tools).
+
 ## Project-Specific Plugins
 
 app-dev-suite is designed to be generic. For project-specific skills (JIRA integration, architecture documentation, etc.), create a separate plugin:

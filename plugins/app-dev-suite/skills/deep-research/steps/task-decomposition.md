@@ -20,7 +20,7 @@ For each task:
 ```markdown
 # {task_id}: {title}
 
-- **method**: {web-research | codebase-analysis | comparative | synthesis-subtask}
+- **method**: {web-research | codebase-analysis | comparative | synthesis-subtask | custom-tool}
 - **covers_dimensions**: {comma-separated dimension numbers}
 
 ## Question
@@ -41,6 +41,7 @@ Task design principles:
 - Place broad/foundational tasks first, specialized/synthesis tasks later
 - Every dimension must be covered by at least one task
 - Use `synthesis-subtask` for tasks that integrate findings from prior tasks
+- If custom tools are listed in the Available Custom Tools section, evaluate each tool's relevance to the research dimensions. Assign `custom-tool` method to tasks where a custom tool is the best fit, and include `tool_name: {Name}` in the task's Guidance section
 
 ### 3. Save Files
 - Save each task definition: `tasks/{task_id}_definition.md`
