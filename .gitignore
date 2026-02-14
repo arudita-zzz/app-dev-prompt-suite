@@ -18,3 +18,4 @@ secrets/
 
 # Marketing drafts (local only)
 marketing/
+.claude
