@@ -154,7 +154,9 @@ app-dev-prompt-suite/                    # Marketplace repository
         │   │   ├── adaptation-prompt.md
         │   │   ├── task-result-format.md
         │   │   ├── report-format.md
-        │   │   └── steps/
+        │   │   ├── steps/
+        │   │   └── script/
+        │   │       └── run-deep-research.sh
         │   ├── feasibility-study/
         │   │   ├── SKILL.md
         │   │   ├── report-format.md
@@ -174,8 +176,7 @@ app-dev-prompt-suite/                    # Marketplace repository
         │       ├── slide-format.md
         │       └── steps/
         ├── script/
-        │   ├── convert-slides.sh
-        │   └── run-deep-research.sh
+        │   └── convert-slides.sh
         ├── agents/
         │   ├── document-summarizer.md
         │   ├── poc-feasibility-expert.md
