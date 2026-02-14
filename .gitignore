@@ -9,5 +9,12 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+secrets/
+
 # Marketing drafts (local only)
 marketing/
